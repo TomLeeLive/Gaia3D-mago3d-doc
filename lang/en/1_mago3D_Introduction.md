@@ -31,6 +31,8 @@ mago3D는 대용량 3D 공간 정보를 효율적으로 시각화하고 분석�
 * **환경 모니터링**: 대기, 수질, 소음 등 환경 데이터를 3D 지도 위에 표현하여 환경 모니터링 및 분석.
 
 ## 기술 사양
+<img src="../../Introduction mago3D.jpg" alt="Functional Specifications">
+
 * **플랫폼**: Windows, Linux, Mac OS
 * **언어**: Java, TypeScript, HTML5, CSS
 * **라이브러리**: CesiumJS
