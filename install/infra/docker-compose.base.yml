@@ -1,0 +1,184 @@
+version: "3.9"
+
+networks:
+  mago3d:
+    external: true
+
+volumes:
+  letsencrypt:
+  config-data:
+  postgresql-data:
+  geoserver-data:
+  minio-data:
+  opensearch-data:
+  rabbitmq-data:
+
+x-networks: &networks
+  mago3d:
+
+services:
+  fluentd:
+    image: ${REGISTRY}/mdtp-fluentd:latest
+    command: fluentd -v
+    networks: *networks
+
+  prometheus:
+    image: ${REGISTRY}/mdtp-prometheus:latest
+    networks: *networks
+
+  alertmanager:
+    image: ${REGISTRY}/mdtp-alertmanager:latest
+    networks: *networks
+
+  grafana:
+    image: ${REGISTRY}/mdtp-grafana:latest
+    networks: *networks
+
+  configrepo:
+    image: ${REGISTRY}/mdtp-configrepo:latest
+    environment:
+      - GITEA__server__ROOT_URL=https://${DOMAIN}/configrepo
+    networks: *networks
+    volumes:
+      - config-data:/var/lib/gitea
+
+  configserver:
+    image: ${REGISTRY}/mdtp-configserver:latest
+    environment:
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=http://configrepo:3000/git/config.git
+      - ENCRYPT_KEY=gaia3d
+    networks: *networks
+
+  postgresql:
+    image: ${REGISTRY}/mdtp-postgresql:latest
+    command: -c shared_buffers=128MB
+    environment:
+      - TZ=Asia/Seoul
+      - POSTGRES_INITDB_ARGS=-k -E UTF8
+    networks: *networks
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+
+  geoserver:
+    image: ${REGISTRY}/mdtp-geoserver:latest
+    environment:
+      - STABLE_EXTENSIONS=ysld-plugin
+      - POSTGRES_JNDI=true
+      - POSTGRES_HOST=postgresql
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=mdtp!!
+      - HTTP_SCHEME=https
+      - HTTP_PROXY_NAME=${DOMAIN}
+      - HTTP_PROXY_PORT=443
+    networks: *networks
+    volumes:
+      - geoserver-data:/opt/geoserver/data_dir
+
+  keycloak:
+    image: ${REGISTRY}/mdtp-keycloak:latest
+    command: start --proxy edge --hostname=${DOMAIN} --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false --spi-theme-cache-templates=false
+    environment:
+      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN:-admin}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD:-admin}
+    networks: *networks
+
+  mapfish:
+    image: ${REGISTRY}/mdtp-mapfish:latest
+    environment:
+      - LOG_LEVEL=DEBUG
+      - TOMCAT_LOG_TYPE=json
+    networks: *networks
+
+  opensearch-node:
+    image: ${REGISTRY}/mdtp-opensearch:latest
+    environment:
+      cluster.name: opensearch-cluster
+      #cluster.initial_master_nodes: &master-nodes opensearch-node1,opensearch-node2,opensearch-node3
+      #discovery.seed_hosts: *master-nodes
+      discovery.type: single-node
+      node.name: opensearch-node
+      bootstrap.memory_lock: "true" # along with the memlock settings below, disables swapping
+      OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      DISABLE_SECURITY_PLUGIN: "true" # disables the OpenSearch Security Plugin, since it's not installed
+      DISABLE_INSTALL_DEMO_CONFIG: "true" # disables the default dashboards, index patterns, etc.
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    networks: *networks
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+
+  opensearch-dashboard:
+    image: ${REGISTRY}/mdtp-opensearch-dashboard:latest
+    environment:
+      - OPENSEARCH_HOSTS= ["http://opensearch-node:9200"]
+      - SERVER_BASEPATH=/opensearch-dashboard
+      - SERVER_REWRITEBASEPATH="true"
+      - DISABLE_SECURITY_DASHBOARDS_PLUGIN="true"
+    networks: *networks
+
+  rabbitmq:
+    image: ${REGISTRY}/mdtp-rabbitmq:latest
+    networks: *networks
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+  registry:
+    image: ${REGISTRY}/mdtp-registry:latest
+    networks: *networks
+
+  registry-ui:
+    image: ${REGISTRY}/mdtp-registry-ui:latest
+    networks: *networks
+
+  cts:
+    image: ${REGISTRY}/mdtp-cts:latest
+    networks: *networks
+
+  storage:
+    image: ${REGISTRY}/mdtp-storage:latest
+    command: server --address :9000 --console-address :9090 /data
+    environment:
+      - TZ=Asia/Seoul
+      - MINIO_DOMAIN=${DOMAIN}
+      - MINIO_SERVER_URL=https://${DOMAIN}:9000
+      - MINIO_BROWSER_REDIRECT_URL=https://${DOMAIN}/minio/console
+    networks: *networks
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: curl -fSs localhost:9000/minio/health/live
+      start_period: 10s
+
+  traefik:
+    image: ${REGISTRY}/mdtp-traefik:latest
+    environment:
+      - TZ=Asia/Seoul
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+      - target: 9000
+        published: 9000
+        protocol: tcp
+        mode: host
+    networks:
+      mago3d:
+        aliases:
+          - ${DOMAIN}
+    volumes:
+      - letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+#      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+#      - ./traefik/dynamic.yml:/etc/traefik/dynamic.yml:ro
+
