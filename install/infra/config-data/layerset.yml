@@ -1,0 +1,57 @@
+server:
+  shutdown: graceful
+  servlet:
+    context-path: /app/api/layerset
+    encoding:
+      charset: utf-8
+      force: true
+  tomcat:
+    max-swallow-size: -1
+    max-http-form-post-size: -1
+  forward-headers-strategy: framework
+    
+spring:
+  config:
+    import:
+      - import/database.yml
+      - import/graphql.yml      
+      - import/rabbitmq.yml
+      - import/security.yml
+      - import/storage.yml
+  servlet:
+    multipart:
+      max-file-size: 2GB
+      max-request-size: 2GB
+
+mago3d:
+  dataset:
+    service:
+      url: https://dev.localhost/app/api/dataset/graphql
+  geoserver:
+    endpoint: https://dev.localhost/geoserver/rest
+    username: admin
+    password: geoserver
+
+geoserver:
+  api:
+    username: admin
+    password: geoserver
+  gwc:
+    url: https://dev.localhost/geoserver/gwc/rest
+  service:
+    url: https://dev.localhost/geoserver/rest
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,refresh,prometheus"
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true          
+      
