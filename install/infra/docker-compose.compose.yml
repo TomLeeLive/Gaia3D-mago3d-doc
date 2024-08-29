@@ -172,6 +172,16 @@ services:
     ports:
       - "5000:80"
 
+  cts:
+    volumes:
+      - ./terrain-data:/data/tilesets/terrain
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.cts.rule=Host(`${DOMAIN}`) && PathPrefix(`/tilesets`)
+      - traefik.http.routers.cts.entrypoints=websecure
+      - traefik.http.routers.cts.service=cts
+      - traefik.http.services.cts.loadbalancer.server.port=8000
+
   storage:
     command: server --address :9000 --console-address :9090 /data
     environment:

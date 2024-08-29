@@ -26,9 +26,9 @@ spring:
 mago3d:
   dataset:
     service:
-      url: https://dev.localhost/app/api/dataset/graphql
+      url: http://dataset:8080/app/api/dataset/graphql
   geoserver:
-    endpoint: https://dev.localhost/geoserver/rest
+    endpoint: http://geoserver:8080/geoserver/rest
     username: admin
     password: geoserver
 
@@ -37,9 +37,9 @@ geoserver:
     username: admin
     password: geoserver
   gwc:
-    url: https://dev.localhost/geoserver/gwc/rest
+    url: http://geoserver:8080/geoserver/gwc/rest
   service:
-    url: https://dev.localhost/geoserver/rest
+    url: http://geoserver:8080/geoserver/rest
     
 management:
   endpoints:

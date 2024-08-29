@@ -8,6 +8,11 @@
 * Docker가 설치된 환경
 * localhost 인증서가 설치된 환경
 
+Docker 데몬을 실행합니다.
+Windows의 경우, Docker Desktop을 실행합니다.
+Mac의 경우, Docker Desktop을 실행합니다.
+Linux의 경우, Docker 서비스를 실행합니다.
+
 ### 인증서 설치 방법
 [mkcert](https://github.com/FiloSottile/mkcert)를 사용하여 localhost 인증서를 생성합니다.
 
@@ -64,11 +69,34 @@ cd install/infra
     master Select Box -> Create Realm -> upload realm-export.json -> create
   ```
 * mago3d client 생성  
-  `install/infra/auth-data/mago3d-api.json`, `install/infra/auth-data/mago3d-front.json`  파일을 이용하여 client를 생성합니다.  
+  `install/infra/auth-data/mago3d-api.json`, `install/infra/auth-data/mago3d-front.json` 파일을 이용하여 client를 생성합니다.  
   ```
-    Clients -> Import client -> Upload mago3d-api.json -> Save  
-    Clients -> Import client -> Upload mago3d-front.json -> Save
+    Select Box -> mago3d -> Clients -> Import client -> Upload mago3d-api.json -> Save  
+    Select Box -> mago3d -> Clients -> Import client -> Upload mago3d-front.json -> Save
   ```  
+* service account role 추가
+  ```
+    Select Box -> mago3d -> Clients -> mago3d-api -> Service account roles -> Assign role ->   
+    Filter by clients -> select (realm-management) manage-users, (account) manage-account -> Assign
+  ```
+* mago3d user 생성
+  ```
+    Select Box -> mago3d ->  Users -> Add user
+    Username: admin
+    -> Save
+  ```
+* mago3d user password 설정
+  ```
+    Select Box -> mago3d -> Users -> admin -> Credentials -> Set password
+    New password: admin
+    Temporary: OFF
+    -> Save
+  ```
+* mago3d user role 추가
+  ```
+    Select Box -> mago3d -> Users -> admin -> Role mapping
+    Assign role -> select admin -> Assign
+  ```
 
 #### 3. ConfigRepo 접속
 * http://dev.localhost/configrepo/
@@ -76,6 +104,33 @@ cd install/infra
 * config 저장소 추가
 * install/infra/config-data/ 하위에 있는 파일 업로드 및 커밋
 * 각자 환경에 맞도록 설정 파일을 수정하고 커밋
+
+#### 4. Geoserver 접속
+* http://dev.localhost/geoserver/
+* 계정: admin/geoserver
+* Workspace 생성
+  ```
+    Workspace -> Add new workspace -> 
+    Workspace Name: mago3d 
+    Namespace URI: https://dev.localhost/geoserver/web/mago3d
+    check Default Workspace 
+    -> Save
+  ```
+* Store 생성
+  ```
+    Stores -> Add new Store -> Store Type: PostGIS ->
+    Workspace: mago3d 
+    Data Store Name: postgis 
+    Connection Parameters:
+      host: postgresql
+      port: 5432
+      database: postgres
+      schema: geoserver
+      user: postgres
+      passwd: postgres
+    -> Save
+  ```
+
 
 ### 3.3. Apps 배포
 ```bash
