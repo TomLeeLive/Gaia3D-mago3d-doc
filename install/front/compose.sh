@@ -77,13 +77,13 @@ case $command in
 build)
   BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
   PROJECT_ROOT=${BASE_DIR}/../..
-  (cd "${PROJECT_ROOT}" && echo ./gradlew "$@" jibDockerBuild)
+  docker compose -f "${PROJECT_ROOT}/front/docker-compose.yml" build "$@"
   ;;
 
 push)
   BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
   PROJECT_ROOT=${BASE_DIR}/../..
-  (cd "${PROJECT_ROOT}" && ./gradlew "$@" jib)
+  docker compose -f "${PROJECT_ROOT}/front/docker-compose.yml" push "$@"
   ;;
 
 config | up | down | ps | logs)
