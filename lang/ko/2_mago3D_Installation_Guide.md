@@ -16,11 +16,16 @@ Linux의 경우, Docker 서비스를 실행합니다.
 ### 인증서 설치 방법
 [mkcert](https://github.com/FiloSottile/mkcert)를 사용하여 localhost 인증서를 생성합니다.
 
-* winget   
+* winget(Windows)    
   PS 터미널을 관리자 권한으로 실행하여 아래 명령을 실행한다.
   ```powershell
   winget install mkcert
   ```
+* brew(macOS)
+  ```bash
+  brew install mkcert
+  ```
+
 * local CA 설치
   ```cmd
   mkcert -install
@@ -38,6 +43,11 @@ Linux의 경우, Docker 서비스를 실행합니다.
 cd install
 ./load_docker_images.sh
 ```
+혹시 실행 권한이 없다면 다음 구문을 실행
+```bash
+chmod +x load_docker_images.sh
+./load_docker_images.sh
+```
 
 ## 2. Docker Network 생성
 아래의 명령어를 실행하여 Docker Network를 생성합니다.
@@ -45,24 +55,34 @@ cd install
 docker network create mago3d
 ```
 
-## 3. Docker Compose 배포
-### 3.1. Infra 배포
+## 3. Terrain Data 복사
+배포된 terrain 폴더를 install/infra/terrain-data 경로에 복사합니다.
+
+## 4. Docker Compose 배포
+### 4.1. Infra 배포
 ```bash
 cd install/infra
 ./compose.sh up -d
 ```
+혹시 실행 권한이 없다면 다음 구문을 실행
+```bash
+chmod +x *.sh
+./compose.sh up -d
+```
+### 4.2. Infra 종료
 종료를 원하면 다음과 같은 명령어를 실행합니다.
 ```bash
 ./compose.sh down
 ```
 
-### 3.2. Infra 설정
-#### 1. Traefik Dashboard 접속
+### 4.3. Infra 설정
+#### 1. Traefik Dashboard
 * http://dev.localhost/dashboard/  
 
-#### 2. Keycloak 접속
+#### 2. Keycloak
 * https://dev.localhost/auth/  
-* 계정: admin/keycloak  
+* Administration Console에 접속하여 다음과 같은 설정을 추가합니다.
+* 계정: admin/keycloak
 * mago3d realm 생성  
   `install/infra/auth-data/realm-export.json` 파일을 이용하여 realm을 생성합니다.  
   ```  
@@ -83,6 +103,7 @@ cd install/infra
   ```
     Select Box -> mago3d ->  Users -> Add user
     Username: admin
+    First Name: admin
     -> Save
   ```
 * mago3d user password 설정
@@ -90,7 +111,7 @@ cd install/infra
     Select Box -> mago3d -> Users -> admin -> Credentials -> Set password
     New password: admin
     Temporary: OFF
-    -> Save
+    -> Save password
   ```
 * mago3d user role 추가
   ```
@@ -98,14 +119,14 @@ cd install/infra
     Assign role -> select admin -> Assign
   ```
 
-#### 3. ConfigRepo 접속
+#### 3. ConfigRepo
 * http://dev.localhost/configrepo/
 * 계정: git/git
 * config 저장소 추가
 * install/infra/config-data/ 하위에 있는 파일 업로드 및 커밋
 * 각자 환경에 맞도록 설정 파일을 수정하고 커밋
 
-#### 4. Geoserver 접속
+#### 4. Geoserver
 * http://dev.localhost/geoserver/
 * 계정: admin/geoserver
 * Workspace 생성
@@ -131,12 +152,33 @@ cd install/infra
     -> Save
   ```
 
+#### 5. Grafana
+* http://dev.localhost/grafana/
+* 계정: admin/admin
+* Datasource 추가
+  ```
+    Configuration -> Data Sources -> Add data source -> Prometheus -> Select
+    Name: Prometheus
+    URL: http://prometheus:9090
+    -> Save & Test
+  ```
+* Dashboard 추가
+* `install/infra/dashboard/jvm-micrometer.json` 파일을 이용하여 dashboard를 추가합니다.
+  ```
+    + -> Import -> Upload JSON File -> jvm-micrometer.json -> Import
+  ```
 
-### 3.3. Apps 배포
+### 4.4. Apps 배포
 ```bash
 cd install/apps
 ./compose.sh up -d
 ```
+혹시 실행 권한이 없다면 다음 구문을 실행
+```bash
+chmod +x *.sh
+./compose.sh up -d
+```
+### 4.5. Apps 종료
 종료를 원하면 다음과 같은 명령어를 실행합니다.
 ```bash
 ./compose.sh down

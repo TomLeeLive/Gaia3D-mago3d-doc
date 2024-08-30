@@ -12,6 +12,7 @@ volumes:
   minio-data:
   opensearch-data:
   rabbitmq-data:
+  grafana-data:
 
 x-networks: &networks
   mago3d:
@@ -33,6 +34,8 @@ services:
   grafana:
     image: ${REGISTRY}/mdtp-grafana:latest
     networks: *networks
+    volumes:
+      - grafana-data:/usr/share/grafana
 
   configrepo:
     image: ${REGISTRY}/mdtp-configrepo:latest
