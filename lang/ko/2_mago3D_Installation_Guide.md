@@ -2,7 +2,7 @@
 
 ---
 
-이 문서는 mago3D를 Docker Compose 및 Docker Stack을 이용하여 설치하는 방법을 안내합니다.
+이 문서는 mago3D를 Docker Compose를 이용하여 설치하는 방법을 안내합니다.
 
 ## 사전 준비 사항
 * Docker가 설치된 환경
