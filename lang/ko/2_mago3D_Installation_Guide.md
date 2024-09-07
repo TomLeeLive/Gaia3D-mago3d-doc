@@ -7,11 +7,12 @@
 ## 사전 준비 사항
 * Docker가 설치된 환경
 * localhost 인증서가 설치된 환경
+* git이 설치된 환경 (https://github.com/git-guides/install-git)
 
-Docker 데몬을 실행합니다.
-Windows의 경우, Docker Desktop을 실행합니다.
-Mac의 경우, Docker Desktop을 실행합니다.
-Linux의 경우, Docker 서비스를 실행합니다.
+Docker 데몬을 실행합니다.  
+Windows의 경우, Docker Desktop을 실행합니다.  
+Mac의 경우, Docker Desktop을 실행합니다.  
+Linux의 경우, Docker 서비스를 실행합니다.  
 
 ### 인증서 설치 방법
 [mkcert](https://github.com/FiloSottile/mkcert)를 사용하여 localhost 인증서를 생성합니다.
@@ -78,34 +79,45 @@ chmod +x *.sh
 ### 4.3. Infra 설정
 #### 1. Traefik Dashboard
 * http://dev.localhost/dashboard/  
+![traefik.png](../../images/Installation_Guide/traefik.png)
 
 #### 2. Keycloak
-* https://dev.localhost/auth/  
+* https://dev.localhost/auth/
 * Administration Console에 접속하여 다음과 같은 설정을 추가합니다.
+![keycloak.png](../../images/Installation_Guide/keycloak.png)
 * 계정: admin/keycloak
 * mago3d realm 생성  
   `install/infra/auth-data/realm-export.json` 파일을 이용하여 realm을 생성합니다.  
   ```  
     master Select Box -> Create Realm -> upload realm-export.json -> create
   ```
+  ![realm.png](../../images/Installation_Guide/realm.png)
 * mago3d client 생성  
   `install/infra/auth-data/mago3d-api.json`, `install/infra/auth-data/mago3d-front.json` 파일을 이용하여 client를 생성합니다.  
   ```
     Select Box -> mago3d -> Clients -> Import client -> Upload mago3d-api.json -> Save  
     Select Box -> mago3d -> Clients -> Import client -> Upload mago3d-front.json -> Save
   ```  
+  ![client.png](../../images/Installation_Guide/client.png)
+  ![import-client.png](../../images/Installation_Guide/import-client.png)
+  ![api-client.png](../../images/Installation_Guide/api-client.png)
 * service account role 추가
   ```
     Select Box -> mago3d -> Clients -> mago3d-api -> Service account roles -> Assign role ->   
     Filter by clients -> select (realm-management) manage-users, (account) manage-account -> Assign
   ```
+  ![assign-role.png](../../images/Installation_Guide/assign-role.png)
+  ![service-account-role.png](../../images/Installation_Guide/service-account-role.png)
+  
 * mago3d user 생성
   ```
     Select Box -> mago3d ->  Users -> Add user
     Username: admin
     First Name: admin
-    -> Save
+    -> Create
   ```
+  ![add-user.png](../../images/Installation_Guide/add-user.png)
+  ![user.png](../../images/Installation_Guide/user.png)
 * mago3d user password 설정
   ```
     Select Box -> mago3d -> Users -> admin -> Credentials -> Set password
@@ -113,21 +125,36 @@ chmod +x *.sh
     Temporary: OFF
     -> Save password
   ```
+  ![password.png](../../images/Installation_Guide/password.png)
 * mago3d user role 추가
   ```
     Select Box -> mago3d -> Users -> admin -> Role mapping
     Assign role -> select admin -> Assign
   ```
+  ![role-mapping.png](../../images/Installation_Guide/role-mapping.png)
 
 #### 3. ConfigRepo
 * http://dev.localhost/configrepo/
+![configrepo.png](../../images/Installation_Guide/configrepo.png)
 * 계정: git/git
 * config 저장소 추가
+![add-repo.png](../../images/Installation_Guide/add-repo.png)
+![create-repo.png](../../images/Installation_Guide/create-repo.png)
 * install/infra/config-data/ 하위에 있는 파일 업로드 및 커밋
+```
+cd install/infra/config-data
+git init
+git checkout -b main
+git add .
+git commit -m "first commit"
+git remote add origin https://dev.localhost/configrepo/git/config.git
+git push -u origin main
+```
 * 각자 환경에 맞도록 설정 파일을 수정하고 커밋
 
 #### 4. Geoserver
 * http://dev.localhost/geoserver/
+![geoserver.png](../../images/Installation_Guide/geoserver.png)
 * 계정: admin/geoserver
 * Workspace 생성
   ```
@@ -137,6 +164,7 @@ chmod +x *.sh
     check Default Workspace 
     -> Save
   ```
+  ![workspace.png](../../images/Installation_Guide/workspace.png)
 * Store 생성
   ```
     Stores -> Add new Store -> Store Type: PostGIS ->
@@ -151,9 +179,12 @@ chmod +x *.sh
       passwd: postgres
     -> Save
   ```
+  ![store.png](../../images/Installation_Guide/store.png)
+  ![store-connection.png](../../images/Installation_Guide/store-connection.png)
 
 #### 5. Grafana
-* http://dev.localhost/grafana/
+* http://dev.localhost/grafana/   
+![grafana.png](../../images/Installation_Guide/grafana.png)
 * 계정: admin/admin
 * Datasource 추가
   ```
@@ -162,12 +193,18 @@ chmod +x *.sh
     URL: http://prometheus:9090
     -> Save & Test
   ```
+  ![datasource.png](../../images/Installation_Guide/datasource.png)
+  ![datasource-prometheus.png](../../images/Installation_Guide/datasource-prometheus.png)
+  ![prometheus-connection.png](../../images/Installation_Guide/prometheus-connection.png)
+  ![prometheus-connection.png](../../images/Installation_Guide/prometheus-connection.png)
 * Dashboard 추가
 * `install/infra/dashboard/jvm-micrometer.json` 파일을 이용하여 dashboard를 추가합니다.
   ```
     + -> Import -> Upload JSON File -> jvm-micrometer.json -> Import
   ```
-
+  ![dashboard.png](../../images/Installation_Guide/dashboard.png)
+  ![import-dashboard.png](../../images/Installation_Guide/import-dashboard.png)
+  ![dashboard-jvm-micrometer.png](../../images/Installation_Guide/dashboard-jvm-micrometer.png)
 ### 4.4. Apps 배포
 ```bash
 cd install/apps
@@ -183,3 +220,32 @@ chmod +x *.sh
 ```bash
 ./compose.sh down
 ```
+
+### 4.6. Front 배포
+```bash
+cd install/front
+./compose.sh up -d
+```
+혹시 실행 권한이 없다면 다음 구문을 실행
+```bash
+chmod +x *.sh
+./compose.sh up -d
+```
+### 4.7. Front 종료
+종료를 원하면 다음과 같은 명령어를 실행합니다.
+```bash
+./compose.sh down
+```
+
+## 5. 접속 확인
+### 5.1. mago3D 사용자 페이지 접속
+* http://dev.localhost/user
+* 계정: admin/admin
+* 로그인 후, 사용자 페이지 접속
+![user-page.png](../../images/Installation_Guide/user-page.png)
+
+### 5.2. mago3D 관리자 페이지 접속
+* http://dev.localhost/admin
+* 계정: admin/admin
+* 로그인 후, 관리자 페이지 접속
+![admin-page.png](../../images/Installation_Guide/admin-page.png)
