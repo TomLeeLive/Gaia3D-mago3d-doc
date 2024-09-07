@@ -56,12 +56,14 @@
     
     ```sql
     $ overturemaps download --bbox=100.3279208704736476,13.4938189846044274,100.9385088643698083,13.9545957682767714 -f geojson --type=building -o bangkok_building.geojson
+    $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=building -o khlongtoei_building.geojson
     ```
     
 - 방콕의 water 데이터를 bangkok_water.jeojson 파일로 다운로드합니다.
     
     ```sql
     $ overturemaps download --bbox=100.3279208704736476,13.4938189846044274,100.9385088643698083,13.9545957682767714 -f geojson --type=water -o bangkok_water.geojson
+    $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=water -o khlongtoei_water.geojson
     ```
     
 - 다운로드한 파일은 가상환경을 생성한 디렉토리에 저장됩니다.

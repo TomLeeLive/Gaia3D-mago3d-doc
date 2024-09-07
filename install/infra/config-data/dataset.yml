@@ -28,7 +28,7 @@ spring:
 
   cloud:
     function:
-      definition: f4dConsumer;t3dConsumer;gdalConsumer
+      definition: f4dConsumer;t3dConsumer;gdalConsumer;terrainConsumer
     stream:
       bindings:
         # F4D
@@ -50,6 +50,13 @@ spring:
           destination: dataflow.tx.gdal.req
         gdalConsumer-in-0:
           destination: dataflow.tx.gdal.res
+          group: dataset
+
+        # Terrain
+        terrainProducer-out-0:
+          destination: dataflow.tx.terrain.req
+        terrainConsumer-in-0:
+          destination: dataflow.tx.terrain.res
           group: dataset
 
 management:
