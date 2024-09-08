@@ -113,3 +113,14 @@
 - 원하는 영상을 검색 완료했다면 마우스 버튼을 클릭하여 다운로드합니다.
 
 ![Sentinel_download2](../../images/Training_Guide/Sentinel_download2.png)
+
+## 데이터 활용 방법
+
+### extrusion models 
+buildings.geojson -> 3D Tiles
+
+1. Upload buildings.geojson to Mago3D
+
+2. Convert buildings.geojson to 3D Tiles
+
+3. Check the converted 3D Tiles in Mago3D
