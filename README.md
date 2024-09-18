@@ -31,10 +31,11 @@ Please refer to the following link for the API.
 
 ## 4. mago3D API 가이드
 API는 다음 링크를 참조하세요.
-### [mago3D API 문서](https://map.gaia3d.com/doc/)
+### [mago3D API 문서](https://mdtp.gaia3d.com/doc/)
+### [mago3D API 가이드](lang/ko/4_mago3D_API_Guide.md)
 
 ## 5. mago3D 트레이닝 가이드
-### [mago3D 트레이닝 가이드](lang/ko/4_mago3D_Training_Guide.md)
+### [mago3D 트레이닝 가이드](lang/ko/5_mago3D_Training_Guide.md)
 
 ---
 
