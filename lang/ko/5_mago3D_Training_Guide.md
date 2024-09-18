@@ -121,21 +121,21 @@
 buildings.geojson -> 3D Tiles
 
 1. buildings.geojson을 Mago3D에 업로드합니다.
-2. Mago3D 내에서 buildings.geojson을 3D Tiles 형식으로 변환합니다.  
+2. mago3D 내에서 buildings.geojson을 3D Tiles 형식으로 변환합니다.  
    다음과 같이 데이터에 맞는 변환 옵션을 선택합니다.
     - Input Type: GeoJSON
     - EPSG code: 4326
-3. Mago3D에서 변환된 3D Tiles를 시각화하고 확인합니다.
+3. mago3D에서 변환된 3D Tiles를 시각화하고 확인합니다.
 
 ### 3차원 모델 
 sample.fbx -> 3D Tiles
 
 1. 3D 원본 데이터를 Mago3D에 업로드합니다.
-2. Mago3D 내에서 3D 원본 데이터를 3D Tiles 형식으로 변환합니다.  
+2. mago3D 내에서 3D 원본 데이터를 3D Tiles 형식으로 변환합니다.  
     다음과 같이 데이터에 맞는 변환 옵션을 선택합니다.
      - Input Type: FBX
      - EPSG code: 4326
-3. Mago3D에서 변환된 3D Tiles를 시각화하고 확인합니다.
+3. mago3D에서 변환된 3D Tiles를 시각화하고 확인합니다.
 
 ### 지형모델 
 dem.tif -> Cesium Terrain Mesh
@@ -145,7 +145,7 @@ dem.tif -> Cesium Terrain Mesh
     다음과 같이 데이터에 맞는 변환 옵션을 선택합니다.
      - Min Depth: 0
      - Max Depth: 12
-3. 변환된 Cesium Terrain Mesh를 Mago3D에서 확인하고 시각화합니다.
+3. 변환된 Cesium Terrain Mesh를 mago3D에서 확인하고 시각화합니다.
 
 ### 2차원 격자 
 satellite.tif -> WMS
@@ -153,7 +153,7 @@ satellite.tif -> WMS
 1. satellite.tif 파일을 Mago3D에 업로드합니다.
 2. 이미지 파일을 좌표체계, 출력 데이터 타입을 선택하여 변환합니다.
 3. 변환된 이미지를 GeoServer 레이어로 자동 게시합니다.
-4. Mago3D에서 변환된 이미지를 WMS로 시각화하여 확인합니다.
+4. mago3D에서 변환된 이미지를 WMS로 시각화하여 확인합니다.
 
 ### 2차원 벡터 
 water.geojson -> WMS
@@ -163,4 +163,4 @@ water.geojson -> WMS
     - Input Type: GeoJSON
     - EPSG code: 4326
 3. 변환하여 데이터베이스에 저장하고 GeoServer 레이어로 자동 게시합니다.
-4. Mago3D에서 변환된 데이터를 WMS로 시각화하여 확인합니다.
+4. mago3D에서 변환된 데이터를 WMS로 시각화하여 확인합니다.
