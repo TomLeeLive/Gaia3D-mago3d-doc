@@ -110,12 +110,11 @@ query Assets {
   - Layerset Application: `{{app-server-url}}`/api/layerset/graphql
   - Userset Application: `{{app-server-url}}`/api/userset/graphql
 
-* 인증 방법: API 사용 시 필요한 인증 방식은 JWT 토큰 방식 입니다, 예제 요청은 다음과 같습니다:
-  `{{auth-server-url}}`/realms/`{{auth-realm}}`/protocol/openid-connect/token
-  `{{auth-server-url}}`: https://dev.localhost/auth
-  `{{auth-realm}}`: mago3d 
-
-POST https://dev.localhost/auth/realms/mago3d/protocol/openid-connect/token
+* 인증 방법: API 사용 시 필요한 인증 방식은 JWT 토큰 방식 입니다, 예제 요청은 다음과 같습니다:  
+  `{{auth-server-url}}`/realms/`{{auth-realm}}`/protocol/openid-connect/token  
+  `{{auth-server-url}}`: https://dev.localhost/auth  
+  `{{auth-realm}}`: mago3d  
+  POST https://dev.localhost/auth/realms/mago3d/protocol/openid-connect/token
 
 #### 1. mago3d-front 클라이언트
 ```json
