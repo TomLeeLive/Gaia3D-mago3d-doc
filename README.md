@@ -11,10 +11,11 @@
 
 ## 4. mago3D API Guide
 Please refer to the following link for the API.
-### [mago3D API Documentation](https://map.gaia3d.com/doc/)
+### [mago3D API Documentation](https://mdtp.gaia3d.com/doc/)
+### [mago3D API Guide](lang/en/4_mago3D_API_Guide.md)
 
 ## 5. mago3D Training Guide
-### [mago3D Training Guide](lang/en/4_mago3D_Training_Guide.md)
+### [mago3D Training Guide](lang/en/5_mago3D_Training_Guide)
 
 ---
 
