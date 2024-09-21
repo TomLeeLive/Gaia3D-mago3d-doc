@@ -29,64 +29,74 @@ API는 크게 `세 가지` 어플리케이션으로 구성되어 있으며, 각 
 * 권한 관리: 각 사용자 그룹에 대한 접속 권한 설정 기능 제공
 
 ### GraphQL API
-GraphQL은 API를 위한 데이터 쿼리 언어로, 클라이언트가 필요한 데이터를 정확하게 요청하고 받을 수 있는 방식입니다. REST API와 달리, 여러 엔드포인트를 사용하지 않고 하나의 엔드포인트에서 다양한 데이터 요청을 처리할 수 있습니다. 이를 통해 불필요한 데이터 전송을 줄이고 효율적인 데이터 통신을 가능하게 합니다.
+GraphQL은 Facebook이 개발한 데이터 쿼리 언어로, API를 효율적으로 호출하고 데이터 요청을 최적화하는 데 사용됩니다.  
+REST API와 달리, GraphQL에서는 클라이언트가 필요한 데이터의 구조를 명확히 정의할 수 있어 과도한 데이터 전송(over-fetching)이나 부족한 데이터 전송(under-fetching)을 방지할 수 있습니다.  
 
 #### 1. 스키마 (Schema)
-
 * 스키마는 GraphQL 서버의 데이터 구조를 정의하는 역할을 합니다. 스키마는 어떤 데이터가 존재하고, 그 데이터들 간의 관계가 무엇인지, 그리고 클라이언트가 어떤 요청을 할 수 있는지를 명확히 설명합니다.
 * 스키마에는 타입(Types), 쿼리(Queries), 뮤테이션(Mutations)이 포함되어 있으며, 이 스키마를 바탕으로 클라이언트는 어떤 데이터를 요청할 수 있는지 알 수 있습니다.
 
 #### 2. 쿼리 (Queries)
-
 * 쿼리는 클라이언트가 데이터를 읽기 위해 서버에 요청을 보내는 방식입니다. 예를 들어, 특정 사용자의 정보를 요청할 때 쿼리를 사용합니다.
 * REST에서 GET 요청과 유사하지만, 필요한 데이터 필드만 선택하여 요청할 수 있습니다. 예를 들어, 사용자의 이름과 이메일만 요청할 수 있습니다.
 쿼리 예시
 ```graphql
 query {
-  user(id: 1) {
+  asset(id: "1") {
+    id
     name
-    email
+    description
   }
 }
 ```
-이 쿼리는 ID가 1인 사용자의 이름과 이메일만 요청하는 예시입니다.
+이 쿼리는 ID가 1인 자산의 ID, 이름, 설명을 요청합니다.
 
 #### 3. 뮤테이션 (Mutations)
-
 * 뮤테이션은 서버의 데이터를 생성(Create), 수정(Update), 삭제(Delete)할 때 사용됩니다. REST의 POST, PUT, DELETE와 비슷한 개념입니다.
 * 뮤테이션을 통해 데이터베이스에 변경이 일어난 후, 요청한 클라이언트에게 변경된 데이터가 반환될 수 있습니다.
 뮤테이션 예시
 ```graphql
-mutation {
-  createUser(name: "John", email: "john@example.com") {
+mutation CreateGroup {
+  createGroup(input: { name: "Group 1", description: "Group 1 description" }) {
     id
     name
+    description
   }
 }
 ```
-이 뮤테이션은 새로운 사용자를 생성하고, 생성된 사용자의 ID와 이름을 반환합니다.
+이 뮤테이션은 새로운 그룹을 생성하고, 생성된 그룹의 ID, 이름, 설명을 반환합니다.
 
 #### 4. 타입 (Type)
-
 * GraphQL의 모든 데이터는 타입으로 정의됩니다. 타입은 스키마에서 데이터를 어떻게 구성할지 나타내며, 각 타입은 필드를 가지며 필드마다 데이터 유형이 있습니다.
 * 예를 들어, User 타입은 사용자의 ID, 이름, 이메일 등의 필드를 가질 수 있습니다.
 타입 예시
 ```graphql
-type User {
-  id: ID
-  name: String
-  email: String
+type Asset {
+    id: ID!
+    name: String!
+    description: String
 }
 ```
-이 타입 정의는 사용자 객체가 ID, 이름, 이메일 필드를 가지고 있음을 나타냅니다.
+이 타입 정의는 ID, 이름, 설명 필드를 가지는 Asset 타입을 정의합니다.
 
 #### 5. 필드 (Field)
-
 * GraphQL 쿼리에서 필드는 데이터를 요청하는 단위입니다. 클라이언트는 필요한 필드만 선택적으로 요청할 수 있으며, 서버는 선택된 필드만 반환합니다. 이를 통해 불필요한 데이터를 주고받지 않게 됩니다.
 
 #### 6. 필터링, 페이징, 정렬
-
 * GraphQL은 클라이언트가 쿼리 시 다양한 조건을 걸어 데이터를 필터링하거나 페이징(페이지 단위로 데이터를 나눠서 요청), 정렬 등을 할 수 있는 유연성을 제공합니다.
+예시
+```graphql
+query Assets {
+  assets(pageable: { page: 0, size: 10, sort: [CREATED_AT_DESC] }) {
+    items {
+      id
+      name
+      description
+    }
+  }
+}
+```
+이 쿼리는 assets를 요청하고, 페이지네이션, 정렬, 필드 선택 등을 적용한 예시입니다.
 
 #### GraphQL의 장점
 * 효율적인 데이터 전송: 클라이언트는 필요한 데이터만 정확하게 요청할 수 있기 때문에, 불필요한 데이터 전송을 줄일 수 있습니다.
@@ -95,17 +105,203 @@ type User {
 
 ## 시작하기(Getting Started)
 
-* API 엔드포인트: GraphQL API의 엔드포인트 URL을 명시합니다.
-* 인증 방법: API 사용 시 필요한 인증 방식은 JWT 토큰 방식 입니다, 예제 요청은 다음과 같습니다:
+* API 엔드포인트: `{{app-server-url}}`: https://dev.localhost/app
+  - Dataset Application: `{{app-server-url}}`/api/dataset/graphql
+  - Layerset Application: `{{app-server-url}}`/api/layerset/graphql
+  - Userset Application: `{{app-server-url}}`/api/userset/graphql
+
+* 인증 방법: API 사용 시 필요한 인증 방식은 JWT 토큰 방식 입니다, 예제 요청은 다음과 같습니다:  
+  `{{auth-server-url}}`/realms/`{{auth-realm}}`/protocol/openid-connect/token  
+  `{{auth-server-url}}`: https://dev.localhost/auth  
+  `{{auth-realm}}`: mago3d  
+  POST https://dev.localhost/auth/realms/mago3d/protocol/openid-connect/token
+
+#### 1. mago3d-front 클라이언트
+```json
+{
+  "grant_type": "password",
+  "client_id": "mago3d-front",
+  "username": "admin",
+  "password": {{admin password}}
+}
+```
+
+#### 2. mago3d-api 클라이언트
+```json
+{
+  "grant_type": "client_credentials",
+  "client_id": "mago3d-api",
+  "client_secret": {{client secret key}}
+}
+```
+
+```json
+{
+    "access_token": {{access token}},
+    "expires_in": 35999,
+    "refresh_expires_in": 0,
+    "token_type": "Bearer",
+    "not-before-policy": 0,
+    "scope": "profile email"
+}
+```
+
 * 요청 및 응답 형식: GraphQL 쿼리 및 뮤테이션의 요청 형식과 서버로부터 받는 응답 형식에 대해 설명합니다.
+
+#### 쿼리 요청 예시
+```graphql
+query Asset {
+  asset(id: "1") {
+    id
+    name
+    description
+  }
+}
+```
+#### 쿼리 응답 예시
+```json
+{
+  "data": {
+    "asset": {
+      "id": "1",
+      "name": "Asset 1",
+      "description": "This is asset 1"
+    }
+  }
+}
+```
+#### 뮤테이션 요청 예시
+```graphql
+mutation CreateGroup {
+  createGroup(input: { name: "Group 1", description: "Group 1 description" }) {
+    id
+    name
+    description
+  }
+}
+```
+
+#### 뮤테이션 응답 예시
+```json
+{
+  "data": {
+    "createGroup": {
+      "id": "1",
+      "name": "Group 1",
+      "description": "Group 1 description"
+    }
+  }
+}
+```
+
+#### 에러처리 응답
+GraphQL 요청이 실패하면, errors 필드를 포함한 응답이 반환됩니다.
+```json
+{
+  "errors": [
+    {
+      "message": "AssetNotFound",
+      "locations": [
+        {
+          "line": 2,
+          "column": 5
+        }
+      ],
+      "path": [
+        "asset"
+      ],
+      "extensions": {
+        "classification": "NOT_FOUND"
+      }
+    }
+  ],
+  "data": {
+    "asset": null
+  }
+}
+```
 
 ## 스키마 개요 (Schema Overview)
 
-* 타입 (Types): GraphQL에서 사용하는 주요 타입을 정의하고, 각 타입의 필드를 설명합니다. 예를 들어, User, Building, Model 등과 같은 타입을 설명합니다.
-* 쿼리 (Queries): 사용자가 데이터를 읽을 수 있는 쿼리 목록을 나열하고, 각 쿼리의 목적과 반환 데이터 타입을 설명합니다.
-* 뮤테이션 (Mutations): 데이터를 생성, 업데이트, 삭제하는 방법을 설명합니다. 각 뮤테이션의 예제와 설명, 그리고 성공 및 실패 시 응답 형식을 제공합니다.
+* 타입 (Types)
+* 쿼리 (Queries)
+* 뮤테이션 (Mutations)
+
+[mago3D API 문서](https://mdtp.gaia3d.com/doc/) 참고
 
 ## 예제 (Examples)
-* 기본 예제: 간단한 예제를 통해 사용자에게 기본적인 GraphQL 쿼리와 뮤테이션을 익힐 수 있도록 합니다. 예를 들어, 특정 사용자를 가져오는 쿼리, 모델을 생성하는 뮤테이션 등을 제공합니다.
-* 고급 예제: 필터링, 페이징, 정렬과 같은 고급 기능을 다룬 예제를 포함합니다.
 
+데이터 변환
+```graphql
+mutation CreateProcess {
+    createProcess(
+        input: {
+            name: "convert 1"
+            source: { assetId: [1] }
+            context: { t3d: { inputType: FBX, recursive: true } }
+        }
+    ) {
+        id
+        name
+        status
+        createdBy
+        createdAt
+        updatedBy
+        updatedAt
+    }
+}
+```
+
+데이터 변환 상태 조회
+```graphql
+query Process {
+    process(id: "1") {
+        id
+        name
+        context
+        status
+    }
+}
+```
+
+레이어 발행
+```graphql
+mutation CreateAsset {
+    createAsset(
+        input: {
+            name: "test"
+            description: "test"
+            context: { t3d: { dataAssetId: "1" } }
+            type: TILES3D
+        }
+    ) {
+        id
+        name
+        description
+        type
+        enabled
+        visible
+        access
+        status
+        order
+    }
+}
+```
+
+레이어 목록 조회
+```graphql
+query Assets {
+  assets {
+    id
+    name
+    description
+    type
+    enabled
+    visible
+    access
+    status
+    order
+    properties
+  }
+}
+```
