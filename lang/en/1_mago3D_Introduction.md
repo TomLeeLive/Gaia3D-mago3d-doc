@@ -1,107 +1,101 @@
-# mago3D 제품소개서
+# mago3D Product Introduction
 
 ---
-## 제품 개요
-mago3D는 대용량 3D 공간 정보를 효율적으로 시각화하고 분석할 수 있는 오픈 소스 웹 플랫폼입니다.  
-도시 계획, 시설 관리, 해양, 국방, 환경 등 다양한 산업 분야에서 혁신적인 솔루션을 제공합니다.
+## Product Overview
+mago3D is an open-source web platform designed for the efficient visualization and analysis of large-scale 3D spatial data.  
+It provides innovative solutions across various industries, including urban planning, facility management, marine, defense, and environmental sectors.
 
-### **🚀 차세대 3D 공간정보 디지털트윈 플랫폼**
-&nbsp;&nbsp;&nbsp;&nbsp;mago3D는 실제 환경에서 발생할 수 있는 다양한 현상을 가상공간에서 시뮬레이션할 수 있는 차세대 도시 디지털 트윈 플랫폼입니다.
+### **🚀 Next-Generation 3D Spatial Information Digital Twin Platform**
+&nbsp;&nbsp;&nbsp;&nbsp;mago3D serves as a next-generation urban digital twin platform, simulating various phenomena that can occur in the real world within a virtual space.
 
-### **💾 대용량 3D 데이터 경량화**
-&nbsp;&nbsp;&nbsp;&nbsp;최첨단 경량화 기법을 적용해 대용량 3D 데이터를 웹 상에서 실시간으로 가시화하며, 비용과 시간을 절감하고 효율적인 의사결정을 돕습니다.   
+### **💾 Lightweight Handling of Large-Scale 3D Data**
+&nbsp;&nbsp;&nbsp;&nbsp;By applying state-of-the-art lightweight techniques, it visualizes large-scale 3D data in real-time on the web, helping to reduce costs and time, and facilitate efficient decision-making.
 
-### **🌐 웹 기반 디지털트윈 솔루션**
-&nbsp;&nbsp;&nbsp;&nbsp;추가 소프트웨어 설치 없이 웹 브라우저와 모바일 기기로 접근해 시뮬레이션 결과를 확인할 수 있는 편리한 웹 기반 솔루션입니다.   
+### **🌐 Web-Based Digital Twin Solution**
+&nbsp;&nbsp;&nbsp;&nbsp;A convenient web-based solution that allows users to access and view simulation results via web browsers and mobile devices without the need for additional software installations.
 
-### **🔗 다양한 분야와 데이터 융합 가능**
-&nbsp;&nbsp;&nbsp;&nbsp;mago3D는 다양한 산업과 데이터를 융합할 수 있는 유연한 디지털 트윈 플랫폼으로, 사용자 맞춤형 서비스를 제공합니다.   
+### **🔗 Integration Across Various Fields and Data**
+&nbsp;&nbsp;&nbsp;&nbsp;mago3D is a flexible digital twin platform that can integrate various industries and data, providing customized services to users.
 
-### **🏆 우수연구개발 혁신제품 지정**
-&nbsp;&nbsp;&nbsp;&nbsp;mago3D는 2023년 국토교통부와 조달청의 심사를 통과하여 우수연구개발 혁신제품으로 지정되었습니다.   
+### **🏆 Designated as an Innovative Product in R&D**
+&nbsp;&nbsp;&nbsp;&nbsp;mago3D was designated as an excellent research and development innovative product in 2023, having passed the review by the Ministry of Land, Infrastructure and Transport and the Public Procurement Service.
 
-### **🔒 기술력 및 인증**
-&nbsp;&nbsp;&nbsp;&nbsp;2019년 한국정보통신기술협회(TTA)로부터 GS인증을 획득했으며, 3D 모델링 경량화 및 웹 기반 공간정보 서비스 관련 국내외 8건의 특허를 보유하고 있습니다.   
+### **🔒 Technical Capabilities and Certifications**
+&nbsp;&nbsp;&nbsp;&nbsp;In 2019, it received GS certification from the Korea Information and Communication Technology Association (TTA) and holds 8 domestic and international patents related to 3D modeling lightweight techniques and web-based spatial information services.
 
-### **🌐 제품 데모 사이트**
-&nbsp;&nbsp;&nbsp;&nbsp;[mago3d.io](https://mago3d.net/)   
-
----
-## 주요 특징
-
-### 1. **고성능 3D 시각화**
-* 대규모 3D 데이터를 웹 브라우저에서 빠르게 렌더링.
-* 텍스처 매핑 및 고해상도 모델 렌더링 기능 제공.
-* 최첨단 경량화 기법을 통한 빠른 데이터 처리 및 시각화.
-
-### 2. **데이터 통합 및 관리**
-* 2D 및 3D 데이터를 통합하여 효율적으로 관리 가능.
-* IFC, 3DS, OBJ, Collada, LAS, GLTF 등 다양한 3D 파일 형식 지원.
-* Shapefile, GeoJSON, GeoTiff 등 다양한 2D 파일 형식 지원.
-* 표준화된 인터페이스를 통한 데이터 연동 및 체계적인 관리.
-
-### 3. **실내/외 공간의 원활한 통합**
-* 실내 및 외부 공간의 연속적인 3D 시각화 제공.
-* 건물 내부, 지하 및 지상 공간 데이터를 끊김 없이 통합하여 표현.
-
-### 4. **OGC 표준 및 다양한 형식 지원**
-* 3DTiles, WMS, WMTS, WFS 등 OGC 표준 준수.
-* 높은 호환성과 상호 운용성을 보장.
-* 표준화된 인터페이스로 효율적인 데이터 연동 및 관리 가능.
-
-### 5. **확장성 및 커스터마이징 지원**
-* 오픈 소스 기반으로 자유롭게 기능 확장 가능.
-* 다양한 사용자 요구에 맞춰 기능 추가 및 맞춤형 개발 지원.
-
-### 6. **유연한 인프라 및 응용 프로그램 통합**
-* Docker, GeoServer, PostgreSQL, OpenSearch 등 다양한 인프라 지원.
-* GraphQL API를 통해 Dataset, Layerset, Userset, Search 등의 응용 프로그램과의 원활한 통합 및 효율적인 데이터 관리 제공.
-
-
+### **🌐 Product Demo Site**
+&nbsp;&nbsp;&nbsp;&nbsp;[mago3d.io](https://mago3d.net/)
 
 ---
-## 응용 분야
+## Key Features
 
-### **🏙️ 도시 계획 및 스마트 시티**
-도시 전체의 3D 모델링을 통해 인프라 관리, 교통 시뮬레이션, 환경 모니터링 등 다양한 도시 문제 해결.
+### 1. **High-Performance 3D Visualization**
+* Rapid rendering of large-scale 3D data in web browsers.
+* Offers texture mapping and high-resolution model rendering capabilities.
+* Fast data processing and visualization through advanced lightweight techniques.
 
-### **🏗️ 시설 관리 및 유지보수**
-건물, 교량, 터널 등 시설물의 3D 모델링을 통한 유지보수, 에너지 관리, 안전 점검 등 효과적인 시설 관리.
+### 2. **Data Integration and Management**
+* Efficiently manage integrated 2D and 3D data.
+* Supports various 3D file formats, including IFC, 3DS, OBJ, Collada, LAS, and GLTF.
+* Supports various 2D file formats such as Shapefile, GeoJSON, and GeoTiff.
+* Standardized interfaces for systematic data integration and management.
 
-### **🌊 해양 및 항만 관리**
-조선업, 컨테이너와 선박구조물 등 이동체 관리, 해양환경 모니터링, 항만 시설 관리 등 다양한 해양 분야의 문제 해결.
+### 3. **Seamless Integration of Indoor and Outdoor Spaces**
+* Provides continuous 3D visualization of indoor and outdoor spaces.
+* Integrates building internal, underground, and above-ground spatial data seamlessly.
 
-### **🛡️ 국방 및 안보**
-군사 시설물, 군사 훈련 시뮬레이션, 군사 정보 시각화 등 국방 분야의 다양한 문제 해결.
+### 4. **Support for OGC Standards and Various Formats**
+* Compliance with OGC standards such as 3DTiles, WMS, WMTS, and WFS.
+* Guarantees high compatibility and interoperability.
+* Efficient data integration and management via standardized interfaces.
 
-### **🌍 환경 모니터링**
-대기, 수질, 소음 등 환경 데이터를 3D 지도 위에 표현하여 환경 모니터링 및 분석.
+### 5. **Scalability and Customization Support**
+* Open-source foundation allows for free extension of functionalities.
+* Supports feature additions and custom development tailored to various user needs.
 
-
-
----
-## 기술 사양
-<img src="../../images/Introduction%20mago3D.jpg" alt="Functional Specifications">
-
-* **지원 프로토콜**: 3DTiles, WMS, WFS, WCS, WPS, WMTS, TMS 등 OGC 표준 프로토콜 지원
-* **변환모듈**: mago3DTiler, mago3DTerrainer, gdalConverter
-* **프레임워크**: SpringBoot, React, CesiumJS
-* **언어**: Java, TypeScript, HTML5, CSS
-* **지원 API**: GraphQL
-* **인프라**: Docker, PostgreSQL, PostGIS, OpenSearch, RabbitMQ, Storage(S3), KeyCloak, Fluentd, Prometheus, Grafana, GeoServer, Mapfish Print
-
-
-
-* **플랫폼**: Windows, Linux, Mac OS
-* **호환성**: 주요 웹 브라우저(Chrome, Firefox, Edge) 지원.
-* **라이선스**: Apache License 2.0
+### 6. **Flexible Infrastructure and Application Integration**
+* Supports various infrastructures, including Docker, GeoServer, PostgreSQL, and OpenSearch.
+* Provides seamless integration and efficient data management with applications like Dataset, Layerset, Userset, and Search via GraphQL API.
 
 ---
-## 결론
-mago3D는 다양한 산업 분야에서 3D 데이터를 활용한 혁신적인 솔루션을 제공하는 강력한 도구입니다. 오픈 소스 기반의 확장성과 실시간 데이터 처리 능력으로 사용자에게 최적의 3D 시각화 및 분석 환경을 제공합니다.
+## Application Areas
+
+### **🏙️ Urban Planning and Smart Cities**
+3D modeling of entire cities to address various urban issues, including infrastructure management, traffic simulation, and environmental monitoring.
+
+### **🏗️ Facility Management and Maintenance**
+Effective facility management through 3D modeling of structures such as buildings, bridges, and tunnels, including maintenance, energy management, and safety inspections.
+
+### **🌊 Marine and Port Management**
+Addresses various marine sector issues, including vessel management, marine environment monitoring, and port facility management.
+
+### **🛡️ Defense and Security**
+Solves various defense-related problems through military facility modeling, training simulations, and military information visualization.
+
+### **🌍 Environmental Monitoring**
+Visualizes environmental data such as air quality, water quality, and noise on a 3D map for monitoring and analysis.
+
+---
+## Technical Specifications
+<img src="../../images/Introduction mago3D.jpg" alt="Functional Specifications">
+
+* **Supported Protocols**: Supports OGC standard protocols such as 3DTiles, WMS, WFS, WCS, WPS, WMTS, and TMS.
+* **Conversion Modules**: mago3DTiler, mago3DTerrainer, gdalConverter.
+* **Frameworks**: SpringBoot, React, CesiumJS.
+* **Languages**: Java, TypeScript, HTML5, CSS.
+* **Supported API**: GraphQL.
+* **Infrastructure**: Docker, PostgreSQL, PostGIS, OpenSearch, RabbitMQ, Storage(S3), KeyCloak, Fluentd, Prometheus, Grafana, GeoServer, Mapfish Print.
+
+* **Platforms**: Windows, Linux, Mac OS.
+* **Compatibility**: Supports major web browsers (Chrome, Firefox, Edge).
+* **License**: Apache License 2.0.
+
+---
+## Conclusion
+mago3D is a powerful tool that offers innovative solutions leveraging 3D data across various industries. With its open-source foundation, scalability, and real-time data processing capabilities, it provides users with the optimal environment for 3D visualization and analysis.
 
 ---
 
-문의처  
-mago3D 공식 웹사이트: [www.mago3d.com](http://www.mago3d.com/)  
-고객 지원 이메일: mago3d@gaia3d.com  
+Contact Information  
+Official mago3D Website: [www.mago3d.com](http://www.mago3d.com/)  
+Customer Support Email: mago3d@gaia3d.com

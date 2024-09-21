@@ -81,7 +81,7 @@ mago3D는 대용량 3D 공간 정보를 효율적으로 시각화하고 분석�
 
 ---
 ## 기술 사양
-<img src="../../images/Introduction%20mago3D.jpg" alt="Functional Specifications">
+<img src="../../images/Introduction mago3D.jpg" alt="Functional Specifications">
 
 * **지원 프로토콜**: 3DTiles, WMS, WFS, WCS, WPS, WMTS, TMS 등 OGC 표준 프로토콜 지원
 * **변환모듈**: mago3DTiler, mago3DTerrainer, gdalConverter
