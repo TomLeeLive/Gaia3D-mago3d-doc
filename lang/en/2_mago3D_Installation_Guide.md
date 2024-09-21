@@ -33,7 +33,7 @@ Generate a localhost certificate using [mkcert](https://github.com/FiloSottile/m
   ```
 * Generate the certificate
   ```cmd
-  cd install/infra/trafik/certs
+  cd install/infra/traefik/certs
   mkcert -cert-file default.crt -key-file default.key localhost dev.localhost *.localhost 127.0.0.1 ::1
   ```
 
@@ -78,7 +78,7 @@ If you want to stop it, run the following command.
 
 ### 4.3. Configure Infra
 #### 1. Traefik Dashboard
-* http://dev.localhost/dashboard/  
+* https://dev.localhost/dashboard/  
   ![traefik.png](../../images/Installation_Guide/traefik.png)
 
 #### 2. Keycloak
@@ -134,7 +134,7 @@ If you want to stop it, run the following command.
   ![role-mapping.png](../../images/Installation_Guide/role-mapping.png)
 
 #### 3. ConfigRepo
-* http://dev.localhost/configrepo/
+* https://dev.localhost/configrepo/
   ![configrepo.png](../../images/Installation_Guide/configrepo.png)
 * Account: git/git
 * Add the config repository
@@ -153,7 +153,7 @@ git push -u origin main
 * Modify the configuration files to fit each environment and commit the changes
 
 #### 4. Geoserver
-* http://dev.localhost/geoserver/
+* https://dev.localhost/geoserver/
   ![geoserver.png](../../images/Installation_Guide/geoserver.png)
 * Account: admin/geoserver
 * Create the Workspace
@@ -183,7 +183,7 @@ git push -u origin main
   ![store-connection.png](../../images/Installation_Guide/store-connection.png)
 
 #### 5. Grafana
-* http://dev.localhost/grafana/   
+* https://dev.localhost/grafana/   
   ![grafana.png](../../images/Installation_Guide/grafana.png)
 * Account: admin/admin
 * Add the Datasource
@@ -239,13 +239,13 @@ If you want to stop it, run the following command.
 
 ## 5. Check Access
 ### 5.1. Access the mago3D user page
-* http://dev.localhost/user
+* https://dev.localhost/user
 * Account: admin/admin
 * After logging in, access the user page
   ![user-page.png](../../images/Installation_Guide/user-page.png)
 
 ### 5.2. Access mago3D admin page
-* http://dev.localhost/admin
+* https://dev.localhost/admin
 * Account: admin/admin
 * After logging in, access the admin page
   ![admin-page.png](../../images/Installation_Guide/admin-page.png)
