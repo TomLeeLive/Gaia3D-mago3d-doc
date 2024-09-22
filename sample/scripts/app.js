@@ -1,14 +1,15 @@
 const viewer = new Cesium.Viewer('cesiumContainer');
+viewer.scene.globe.depthTestAgainstTerrain = true;
 
-const resource_3d = './assets/3dtile/tileset.json'
-const resource_2d = 'mdtp:shp_f57bc7243c85c6068c908f811ae34351';
+const resource_3d = './assets/3dtiles/tileset.json'
+const resource_2d = 'mago3d:coverage_00a0f46b4b3becbc2f3ca9a4b19b5618';
 const resource_terrain = './assets/terrain/'
 
 // 3d
 Cesium.Cesium3DTileset.fromUrl(resource_3d)
     .then(model => {
         viewer.scene.primitives.add(model);
-        viewer.zoomTo(model);
+        //viewer.zoomTo(model);
     });
 
 // 2d
@@ -29,16 +30,10 @@ const imageLayer = new Cesium.ImageryLayer(
 );
 viewer.scene.imageryLayers.add(imageLayer);
 
-
 // terrain
 viewer.terrainProvider = await Cesium.CesiumTerrainProvider.fromUrl(resource_terrain);
 
-
-
-const seoul = {lat: 37.593327, lng: 127.092323}
 const bangkok = {lat: 13.730276, lng: 100.560534}
-
-const seoulBtn = document.getElementById("seoul-btn");
 const bangkokBtn = document.getElementById("bangkok-btn");
 
 const flyToPosition = (viewer, position) => {
@@ -48,6 +43,4 @@ const flyToPosition = (viewer, position) => {
     })
 }
 
-seoulBtn.addEventListener("click", () => flyToPosition(viewer, seoul));
 bangkokBtn.addEventListener("click", () => flyToPosition(viewer, bangkok));
-
