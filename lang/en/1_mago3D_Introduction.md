@@ -24,7 +24,7 @@ It provides innovative solutions across various industries, including urban plan
 &nbsp;&nbsp;&nbsp;&nbsp;In 2019, it received GS certification from the Korea Information and Communication Technology Association (TTA) and holds 8 domestic and international patents related to 3D modeling lightweight techniques and web-based spatial information services.
 
 ### **🌐 Product Demo Site**
-&nbsp;&nbsp;&nbsp;&nbsp;[mago3d.io](https://mago3d.net/)
+&nbsp;&nbsp;&nbsp;&nbsp;[mago3d.io](https://map.gaia3d.com/user/)
 
 ---
 ## Key Features
