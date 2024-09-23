@@ -24,7 +24,7 @@ mago3D는 대용량 3D 공간 정보를 효율적으로 시각화하고 분석�
 &nbsp;&nbsp;&nbsp;&nbsp;2019년 한국정보통신기술협회(TTA)로부터 GS인증을 획득했으며, 3D 모델링 경량화 및 웹 기반 공간정보 서비스 관련 국내외 8건의 특허를 보유하고 있습니다.   
 
 ### **🌐 제품 데모 사이트**
-&nbsp;&nbsp;&nbsp;&nbsp;[mago3d.io](https://mago3d.net/)   
+&nbsp;&nbsp;&nbsp;&nbsp;[mago3d.io](https://map.gaia3d.com/user)   
 
 ---
 ## 주요 특징
