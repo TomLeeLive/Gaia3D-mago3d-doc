@@ -78,7 +78,7 @@ chmod +x *.sh
 
 ### 4.3. Infra 설정
 #### 1. Traefik Dashboard
-* http://dev.localhost/dashboard/  
+* https://dev.localhost/dashboard/  
 ![traefik.png](../../images/Installation_Guide/traefik.png)
 
 #### 2. Keycloak
@@ -134,7 +134,7 @@ chmod +x *.sh
   ![role-mapping.png](../../images/Installation_Guide/role-mapping.png)
 
 #### 3. ConfigRepo
-* http://dev.localhost/configrepo/
+* https://dev.localhost/configrepo/
 ![configrepo.png](../../images/Installation_Guide/configrepo.png)
 * 계정: git/git
 * config 저장소 추가
@@ -153,7 +153,7 @@ git push -u origin main
 * 각자 환경에 맞도록 설정 파일을 수정하고 커밋
 
 #### 4. Geoserver
-* http://dev.localhost/geoserver/
+* https://dev.localhost/geoserver/
 ![geoserver.png](../../images/Installation_Guide/geoserver.png)
 * 계정: admin/geoserver
 * Workspace 생성
@@ -183,7 +183,7 @@ git push -u origin main
   ![store-connection.png](../../images/Installation_Guide/store-connection.png)
 
 #### 5. Grafana
-* http://dev.localhost/grafana/   
+* https://dev.localhost/grafana/   
 ![grafana.png](../../images/Installation_Guide/grafana.png)
 * 계정: admin/admin
 * Datasource 추가
@@ -239,13 +239,13 @@ chmod +x *.sh
 
 ## 5. 접속 확인
 ### 5.1. mago3D 사용자 페이지 접속
-* http://dev.localhost/user
+* https://dev.localhost/user
 * 계정: admin/admin
 * 로그인 후, 사용자 페이지 접속
 ![user-page.png](../../images/Installation_Guide/user-page.png)
 
 ### 5.2. mago3D 관리자 페이지 접속
-* http://dev.localhost/admin
+* https://dev.localhost/admin
 * 계정: admin/admin
 * 로그인 후, 관리자 페이지 접속
 ![admin-page.png](../../images/Installation_Guide/admin-page.png)
