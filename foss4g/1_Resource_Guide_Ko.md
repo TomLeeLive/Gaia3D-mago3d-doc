@@ -13,7 +13,7 @@
 
 ### 2. docker에 필요 항목 다운로드
 
-- cmd 창을 연다.
+- cmd 창을 엽니다.
 - mago3d-tiler를 설치합니다.
     ```sql
     $ docker pull gaia3d/mago-3d-tiler

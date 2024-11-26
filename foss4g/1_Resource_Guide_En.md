@@ -36,7 +36,7 @@
 ### 1. Verify Python Installation
 
 - [Install Python](https://www.python.org/downloads/)
-- Open cmd prompt and verify Python installation. Enter the following command:
+- Open cmd prompt and verify Python installation. Enter the following command.
     ```sql
     $ python --version
     ```
@@ -48,7 +48,7 @@
     $ cd C:\mago3d
     ```
 
-- Enter the following command to create a virtual environment:
+- Enter the following command to create a virtual environment.
     ```sql
     $ python -m venv myvenv
     ```
@@ -57,7 +57,7 @@
 
 ### 3. Activate Virtual Environment
 
-- To activate the virtual environment, enter the following command in the cmd prompt:
+- To activate the virtual environment, enter the following command in the cmd prompt.
     ```sql
     $ myvenv\Scripts\activate
     ```
@@ -66,20 +66,20 @@
 
 ### 4. Install Overture Maps Package
 
-- With the virtual environment activated, enter the following command in the cmd prompt to install the Overture Maps package:
+- With the virtual environment activated, enter the following command in the cmd prompt to install the Overture Maps package.
     ```sql
     $ pip install overturemaps
     ```
 
 ### 5. Download Overture Maps Data
 
-- With the virtual environment activated, download Overture Maps data by entering the following commands in the cmd prompt:
-- Download Building data for Bangkok to khlongtoei_building.geojson file:
+- With the virtual environment activated, download Overture Maps data by entering the following commands in the cmd prompt.
+- Download Building data for Bangkok to khlongtoei_building.geojson file.
     ```sql
     $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=building -o khlongtoei_building.geojson
     ```
 
-- Download transportation data for Bangkok to khlongtoei_transportation.geojson file:
+- Download transportation data for Bangkok to khlongtoei_transportation.geojson file.
     ```sql
     $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=segment -o khlongtoei_transportation.geojson
     ```
