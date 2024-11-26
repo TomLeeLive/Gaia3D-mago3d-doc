@@ -79,11 +79,6 @@
     $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=building -o khlongtoei_building.geojson
     ```
 
-- Download water data for Bangkok to khlongtoei_water.geojson file:
-    ```sql
-    $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=water -o khlongtoei_water.geojson
-    ```
-
 - Download transportation data for Bangkok to khlongtoei_transportation.geojson file:
     ```sql
     $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=segment -o khlongtoei_transportation.geojson

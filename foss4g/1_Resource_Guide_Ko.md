@@ -6,7 +6,7 @@
 
 ### 1. 원하는 경로에 실습을 위해 사용할 파일 생성
 
-- 예를 들어, C:/ 경로에 mago3d 폴더와 workspace 폴더를 생성한다.
+- 예를 들어, C:/ 경로에 mago3d 폴더와 workspace 폴더를 생성합니다.
     ```sql
     $ C:\Users\user> mkdir ../../mago3d/workspace
     ```
@@ -14,15 +14,15 @@
 ### 2. docker에 필요 항목 다운로드
 
 - cmd 창을 연다.
-- mago3d-tiler를 설치한다.
+- mago3d-tiler를 설치합니다.
     ```sql
     $ docker pull gaia3d/mago-3d-tiler
     ```
-- mago3d-terrainer를 설치한다.
+- mago3d-terrainer를 설치합니다.
     ```sql
     $ docker pull gaia3d/mago-3d-terrainer
     ```
-- 생성해줬던 디렉터리에 geoserver를 설치한다.
+- 생성해줬던 디렉터리에 geoserver를 설치합니다.
     ```spl
 	$ docker run -v C:\mago3d\workspace\geoserver:/apt/geoserver/data_dir -e GEOSEVER_ADMIN_USER=admin -e GEOSERVER_ADMIN_PASSWORD=geoserver -p 8080:8080 kartoza/geoserver
     ```
@@ -80,11 +80,6 @@
     $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=building -o khlongtoei_building.geojson
     ```
 
-- 방콕의 water 데이터를 khlongtoei_water.geojson 파일로 다운로드합니다.
-    ```sql
-    $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=water -o khlongtoei_water.geojson
-    ```
-  
 - 방콕의 transportation 데이터를 khlongtoei_transportation.geojson 파일로 다운로드합니다.
     ```sql
     $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=segment -o khlongtoei_transportation.geojson

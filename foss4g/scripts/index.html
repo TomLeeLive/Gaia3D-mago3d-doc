@@ -17,7 +17,7 @@
             padding: 10px;
             background-color: white;
         }
-        
+
         #layerButtons {
             display: flex;
             flex-direction: column;
@@ -30,7 +30,7 @@
     <div id="function-div">
         <h3>Fly to</h3>
         <button id="bangkok-btn">Bangkok</button>
-        
+
         <h3>Toggle Layer</h3>
         <button id="buildings-btn">buildings</button>
         <div id="layerButtons"></div>
@@ -49,8 +49,8 @@
         const geoserverUrl = 'http://localhost:8080/geoserver/wms';
 
         // ✏️ Using layer name in geoserver
-        const resource_2d = 'mago3d:tif';
-        const resource_transportation = 'mago3d:rome_segments';
+        const resource_2d = 'mago3d:T47PPR_20240430T033541_TCI_10m';
+        const resource_transportation = 'mago3d:khlongtoei_transportation';
 
         // Set terrain
         viewer.terrainProvider = await Cesium.CesiumTerrainProvider.fromUrl(resource_terrain);
