@@ -93,13 +93,13 @@
 
         // Set style
         const removeListener = viewer.scene.postRender.addEventListener(
-        function () {
-            if (viewer.scene.globe.tilesLoaded) {
-                setStyle();
+            function () {
+                if (viewer.scene.globe.tilesLoaded) {
+                    setStyle();
 
-                removeListener();
-            }
-        }.bind(this)
+                    removeListener();
+                }
+            }.bind(this)
         );
 
         const bangkok = { lat: 13.730276, lng: 100.560534 };

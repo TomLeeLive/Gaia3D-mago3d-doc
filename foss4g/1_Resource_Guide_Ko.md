@@ -131,7 +131,7 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 ---
 
 이번 실습에서는 도시 디지털 트윈 구축을 위한 데이터로 건물, 운송, 위성영상, DEM(디지털 고도 모델) 데이터를 다운로드할 예정입니다.  
-이러한 데이터는 Overture Maps, NASA, Copernicus Data Space Ecosystem과 같은 플랫폼에서 제공되며, 모두 **오픈 데이터(Open Data)**로 접근이 가능합니다.
+이러한 데이터는 Overture Maps, NASA, Copernicus Data Space Ecosystem과 같은 플랫폼에서 제공되며, 모두 **오픈 데이터(Open Data)** 로 접근이 가능합니다.
 
 이 데이터들은 도시의 공간 정보를 입체적으로 표현하고 분석할 수 있는 기초 데이터면서 중요한 자료로,   
 3D, Vector, Raster, Terrain 같은 다양한 데이터 형식을 활용할 수 있습니다.

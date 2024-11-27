@@ -89,7 +89,7 @@ mago3d-terrainer를 통해 terrain 정보로 변환할 파일이며, mago3d-tile
   
 ## MAGO3D-TILER
 
-- 건물의 기본 높이 정보를 3.3m로 지정하여 mago3d-tiler를 돌립니다.
+- 건물의 기본 높이 값을 3.3m로 지정하여 mago3d-tiler를 돌립니다.
 
 ### Windows
 
@@ -142,7 +142,7 @@ $ docker run \
 
 ## MAGO3D-TERRAINER
 
-- terrain의 최대 level을 14로 지정하여 mago3d-terrainer를 돌립니다.
+- terrain의 최대 깊이를 14로 지정하여 mago3d-terrainer를 돌립니다.
 
 ### Windows
 
@@ -265,7 +265,7 @@ docker run \
 
 - 원하는 IDE로 `C:\mago3d\workspace\index.html` 파일을 열어줍니다.
   - 필요하다면 ✏️ 아이콘이 있는 코드들을 사용자 환경에 맞게 수정합니다.
-- index.html 파일을 켜둔 상태로 서버를 활성화 시켜 chrome에서 결과물을 확인합니다.
+- index.html 파일을 **켜둔 상태로** 서버를 활성화 시켜 chrome에서 결과물을 확인합니다.
 
 ## IDE
 
