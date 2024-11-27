@@ -209,13 +209,21 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to view all command options.
   - **ID**: admin
   - **PASSWORD**: geoserver
 
+    ![](images/en/gs_login.png)
+
 2. Navigate to **Workspaces** in the left menu.
 
+   ![](images/en/gs_workspace.png)
+
 3. Click the **Add New Workspace** button.
+
+   ![](images/en/gs_new_workspace.png)
 
 4. Enter the following information:
   - **Name**: Workspace name (e.g., `mago3d`)
   - **Namespace URI**: Unique URI (e.g., `http://www.mago3d_workspace.com`)
+
+    ![](images/en/gs_save_workspace.png)
 
 5. Click the **Save** button to save.
 
@@ -224,12 +232,24 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to view all command options.
 ## 3. Create Store
 
 1. Go to **Data Stores** in the admin console.
+
+   ![](images/en/gs_stores.png)
+
 2. Click the **Add New Store** button.
+
+   ![](images/en/gs_new_stores.png)
+
 3. Select the data format you want to use (e.g., Shapefile, GeoTIFF, etc.).
+
+   ![]()
+
 4. Enter the following information:
   - **Workspace**: Select the workspace created previously
   - **Data Store Name**: Enter a name for the data store (e.g., `mago3d_store`)
   - **Connection Parameters**: Select the directory where the data was previously stored
+
+  ![]()
+
 5. Click the **Save** button to save.
 
 ---
@@ -237,13 +257,28 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to view all command options.
 ## 4. Publish Layer
 
 1. Navigate to the **Layers** menu.
+
+   ![](images/en/gs_layers.png)
+
 2. Click the **Add New Layer** button.
+
+   ![]()
+
 3. Select the data store created in the previous step.
+
+   ![]()
+
 4. Select the data you want to add from the available data list and click **Publish**.
+
+   ![]()
+
 5. Set layer attributes:
   - **Name**: Layer name (e.g.: khlongtoei_transportation / T47PPR_20240430T033541_TCI_10m)
   - **Spatial Coordinate System**: Specify the coordinate system of the data (e.g., EPSG:4326)
   - **Layer Bounds**: Click to calculate from the data
+
+    ![]()
+
 6. Click the **Save** button to save.
 
 ---
@@ -251,9 +286,17 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to view all command options.
 ## 5. Layer Preview
 
 1. Navigate to the **Layer Preview** menu.
+
+   ![](images/en/gs_layers_preview.png)
+
 2. Find the published layer in the list.
+
+   ![]()
+
 3. Select a preview format (WMS, OpenLayers, etc.)
   - Selecting OpenLayers allows you to view the layer in the browser.
+
+  ![]()
 
 ---
 
