@@ -15,7 +15,7 @@ x-logging-fluentd: &logging-fluentd
 
 services:
   gdal-converter:
-    image: ${REGISTRY}/mdtp-gdal-converter:latest
+    image: ${REGISTRY}/mago3d-gdal-converter:latest
     networks: *networks
     logging:
       driver: fluentd
@@ -24,7 +24,7 @@ services:
         tag: docker.springboot.gdal-converter
 
   t3d-converter:
-    image: ${REGISTRY}/mdtp-t3d-converter:latest
+    image: ${REGISTRY}/mago3d-t3d-converter:latest
     networks: *networks
     logging:
       driver: fluentd
@@ -33,7 +33,7 @@ services:
         tag: docker.springboot.t3d-converter
 
   f4d-converter:
-    image: ${REGISTRY}/mdtp-f4d-converter:latest
+    image: ${REGISTRY}/mago3d-f4d-converter:latest
     networks: *networks
     logging:
       driver: fluentd
@@ -42,7 +42,7 @@ services:
         tag: docker.springboot.f4d-converter
 
   terrain-converter:
-    image: ${REGISTRY}/mdtp-terrain-converter:latest
+    image: ${REGISTRY}/mago3d-terrain-converter:latest
     networks: *networks
     logging:
       driver: fluentd
@@ -51,7 +51,7 @@ services:
         tag: docker.springboot.terrain-converter
 
   dataset:
-    image: ${REGISTRY}/mdtp-dataset-app:latest
+    image: ${REGISTRY}/mago3d-dataset-app:latest
     networks: *networks
     logging:
       driver: fluentd
@@ -60,7 +60,7 @@ services:
         tag: docker.springboot.dataset
 
   userset:
-    image: ${REGISTRY}/mdtp-userset-app:latest
+    image: ${REGISTRY}/mago3d-userset-app:latest
     networks: *networks
     logging:
       driver: fluentd
@@ -69,7 +69,7 @@ services:
         tag: docker.springboot.userset
 
   layerset:
-    image: ${REGISTRY}/mdtp-layerset-app:latest
+    image: ${REGISTRY}/mago3d-layerset-app:latest
     networks: *networks
     logging:
       driver: fluentd

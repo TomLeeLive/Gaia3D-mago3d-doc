@@ -6,6 +6,9 @@ x-logging-fluentd: &logging-fluentd
   fluentd-address: localhost:24224
   fluentd-async: "true"
 
+x-env: &env
+  SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+
 services:
   fluentd:
     environment:
@@ -256,3 +259,106 @@ services:
       options:
         <<: *logging-fluentd
         tag: docker.traefik
+
+  gdal-converter:
+    environment:
+      <<: *env
+    depends_on:
+      configserver:
+        condition: service_healthy
+
+  f4d-converter:
+    environment:
+      <<: *env
+    depends_on:
+      configserver:
+        condition: service_healthy
+
+  t3d-converter:
+    environment:
+      <<: *env
+    depends_on:
+      configserver:
+        condition: service_healthy
+
+  terrain-converter:
+    environment:
+      <<: *env
+    depends_on:
+      configserver:
+        condition: service_healthy
+
+  dataset:
+    environment:
+      <<: *env
+      SERVER_SERVLET_CONTEXT_PATH: /app/api/dataset
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dataset.rule=Host(`${DOMAIN}`) && PathPrefix(`/app/api/dataset`)
+      - traefik.http.routers.dataset.entrypoints=websecure
+      - traefik.http.routers.dataset.tls=true
+      - traefik.http.routers.dataset.service=dataset
+      - traefik.http.services.dataset.loadbalancer.server.port=8080
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      configserver:
+          condition: service_healthy
+
+
+  userset:
+    environment:
+      <<: *env
+      SERVER_SERVLET_CONTEXT_PATH: /app/api/userset
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.userset.rule=Host(`${DOMAIN}`) && PathPrefix(`/app/api/userset`)
+      - traefik.http.routers.userset.entrypoints=websecure
+      - traefik.http.routers.userset.tls=true
+      - traefik.http.routers.userset.service=userset
+      - traefik.http.services.userset.loadbalancer.server.port=8080
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      configserver:
+        condition: service_healthy
+
+  layerset:
+    environment:
+      <<: *env
+      SERVER_SERVLET_CONTEXT_PATH: /app/api/layerset
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.layerset.rule=Host(`${DOMAIN}`) && PathPrefix(`/app/api/layerset`)
+      - traefik.http.routers.layerset.entrypoints=websecure
+      - traefik.http.routers.layerset.tls=true
+      - traefik.http.routers.layerset.service=layerset
+      - traefik.http.services.layerset.loadbalancer.server.port=8080
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      configserver:
+        condition: service_healthy
+
+  apidoc:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.apidoc.rule=Host(`${DOMAIN}`) && PathPrefix(`/doc`)
+      - traefik.http.routers.apidoc.entrypoints=websecure
+      - traefik.http.routers.apidoc.service=apidoc
+      - traefik.http.services.apidoc.loadbalancer.server.port=80
+
+  frontend:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.frontend.rule=Host(`${DOMAIN}`) && (PathPrefix(`/user`) || PathPrefix(`/admin`))
+      - traefik.http.routers.frontend.entrypoints=websecure
+      - traefik.http.routers.frontend.service=frontend
+      - traefik.http.services.frontend.loadbalancer.server.port=80
+    depends_on:
+      dataset:
+        condition: service_started
+      layerset:
+        condition: service_started
+      userset:
+        condition: service_started

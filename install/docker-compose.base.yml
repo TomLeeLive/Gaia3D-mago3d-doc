@@ -18,6 +18,12 @@ volumes:
 x-networks: &networks
   mago3d:
 
+x-logging-fluentd: &logging-fluentd
+  fluentd-address: localhost:24224
+  fluentd-async: "true"
+  fluentd-buffer-limit: 0
+  tag: docker.springboot.{{.Name}}
+
 services:
   fluentd:
     image: ${REGISTRY}/mago3d-fluentd:latest
@@ -37,18 +43,24 @@ services:
 
   configrepo:
     image: ${REGISTRY}/mago3d-configrepo:latest
-    user: '0'
+#    user: '0'
     environment:
       - GITEA__server__ROOT_URL=https://${DOMAIN}/configrepo
     networks: *networks
-    volumes:
-      - config-data:/var/lib/gitea
+#    volumes:
+#      - config-data:/var/lib/gitea
 
   configserver:
     image: ${REGISTRY}/mago3d-configserver:latest
     environment:
       - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=http://configrepo:3000/git/config.git
       - ENCRYPT_KEY=gaia3d
+    healthcheck:
+      test: curl -f http://localhost:8888/actuator/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     networks: *networks
 
   postgresql:
@@ -58,6 +70,12 @@ services:
       - TZ=Asia/Seoul
       - POSTGRES_INITDB_ARGS=-k -E UTF8
     networks: *networks
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     volumes:
       - postgresql-data:/var/lib/postgresql/data
 
@@ -167,3 +185,77 @@ services:
 #      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
 #      - ./traefik/dynamic.yml:/etc/traefik/dynamic.yml:ro
 
+  gdal-converter:
+    image: ${REGISTRY}/mago3d-gdal-converter:latest
+    networks: *networks
+    logging:
+      driver: fluentd
+      options:
+        <<: *logging-fluentd
+        tag: docker.springboot.gdal-converter
+
+  t3d-converter:
+    image: ${REGISTRY}/mago3d-t3d-converter:latest
+    networks: *networks
+    logging:
+      driver: fluentd
+      options:
+        <<: *logging-fluentd
+        tag: docker.springboot.t3d-converter
+
+  f4d-converter:
+    image: ${REGISTRY}/mago3d-f4d-converter:latest
+    networks: *networks
+    logging:
+      driver: fluentd
+      options:
+        <<: *logging-fluentd
+        tag: docker.springboot.f4d-converter
+
+  terrain-converter:
+    image: ${REGISTRY}/mago3d-terrain-converter:latest
+    networks: *networks
+    logging:
+      driver: fluentd
+      options:
+        <<: *logging-fluentd
+        tag: docker.springboot.terrain-converter
+
+  dataset:
+    image: ${REGISTRY}/mago3d-dataset-app:latest
+    networks: *networks
+    logging:
+      driver: fluentd
+      options:
+        <<: *logging-fluentd
+        tag: docker.springboot.dataset
+
+  userset:
+    image: ${REGISTRY}/mago3d-userset-app:latest
+    networks: *networks
+    logging:
+      driver: fluentd
+      options:
+        <<: *logging-fluentd
+        tag: docker.springboot.userset
+
+  layerset:
+    image: ${REGISTRY}/mago3d-layerset-app:latest
+    networks: *networks
+    logging:
+      driver: fluentd
+      options:
+        <<: *logging-fluentd
+        tag: docker.springboot.layerset
+
+  apidoc:
+    image: ${REGISTRY}/mago3d-api-doc:latest
+    networks: *networks
+    deploy:
+      replicas: 1
+
+  frontend:
+    image: ${REGISTRY}/mago3d-frontend:latest
+    networks: *networks
+    deploy:
+      replicas: 1
