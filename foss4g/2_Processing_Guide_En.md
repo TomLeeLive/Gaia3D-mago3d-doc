@@ -2,14 +2,14 @@
 
 # :bookmark_tabs: Data Preprocessing
 
-Before the practice, in this chapter, we will proceed with data processing and conversion necessary for utilizing data in Mago3D and GeoServer.  
+Before the practice, in this chapter, we will proceed with data processing and conversion necessary for utilizing data in mago3D and GeoServer.  
 These tools provide powerful capabilities for implementing and visualizing urban digital twins, but conversion to data formats that meet each tool's characteristics and requirements is necessary.  
 The data conversion tasks to be performed can be summarized in the following table:
 
-| Original Filename |  Before Conversion   |    After Conversion    |                    Conversion Reason                     |  
-|:---:|:-------:|:----------:|:--------------------------------------------:|
-|khlongtoei_building.geojson| GeoJSON |  3DTiles   |      To smoothly render in Mago3D according to osgeo standards       |
-|khlongtoei_transportation.geojson| GeoJSON | Geopackage |       To increase management and distribution efficiency in GeoServer       |
+| Original Filename |  Before Conversion   |    After Conversion    |                                  Conversion Reason                                   |  
+|:---:|:-------:|:----------:|:------------------------------------------------------------------------------------:|
+|khlongtoei_building.geojson| GeoJSON |  3DTiles   |              To smoothly render in mago3D according to osgeo standards               |
+|khlongtoei_transportation.geojson| GeoJSON | Geopackage |           To increase management and distribution efficiency in GeoServer            |
 |T47PPR_20240430T033541_TCI_10m.jp2|   JP2   |  GeoTiff   | To convert satellite images to a format easily analyzed and distributed in GeoServer |
 
 Practice preparation is now complete. Proceed to the next step! 🚀
@@ -239,16 +239,24 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to view all command options.
 
    ![](images/en/gs_new_stores.png)
 
-3. Select the data format you want to use (e.g., Shapefile, GeoTIFF, etc.).
+3. Select the data format you want to use (e.g., GeoTIFF, GeoPackage).
 
-   ![]()
+   ![](images/en/gs_select_stores.png)
 
 4. Enter the following information:
   - **Workspace**: Select the workspace created previously
-  - **Data Store Name**: Enter a name for the data store (e.g., `mago3d_store`)
+  - **Data Store Name**: Enter a name for the data store (e.g., `sentinel`, `transportation`)
   - **Connection Parameters**: Select the directory where the data was previously stored
 
-  ![]()
+    #### Sentinel GeoTiFF
+    
+    ![](images/en/gs_stores_sentinel.png)
+    ![](images/en/gs_select_sentinel.png)
+
+    ### Transportation GeoPackage 
+
+    ![](images/en/gs_stores_transp.png)
+    ![](images/en/gs_select_transp.png)
 
 5. Click the **Save** button to save.
 
@@ -262,22 +270,23 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to view all command options.
 
 2. Click the **Add New Layer** button.
 
-   ![]()
+   ![](images/en/gs_new_layer.png)
 
 3. Select the data store created in the previous step.
 
-   ![]()
-
 4. Select the data you want to add from the available data list and click **Publish**.
 
-   ![]()
+   ![](images/en/gs_select_layer.png)
 
 5. Set layer attributes:
   - **Name**: Layer name (e.g.: khlongtoei_transportation / T47PPR_20240430T033541_TCI_10m)
+
+    ![](images/en/gs_edit_layer_1.png)
+
   - **Spatial Coordinate System**: Specify the coordinate system of the data (e.g., EPSG:4326)
   - **Layer Bounds**: Click to calculate from the data
 
-    ![]()
+    ![](images/en/gs_edit_layer_2.png)
 
 6. Click the **Save** button to save.
 
@@ -291,12 +300,11 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to view all command options.
 
 2. Find the published layer in the list.
 
-   ![]()
-
 3. Select a preview format (WMS, OpenLayers, etc.)
   - Selecting OpenLayers allows you to view the layer in the browser.
 
-  ![]()
+  ![](images/en/gs_select_preview.png)
+  ![](images/en/gs_preview.png)
 
 ---
 
@@ -320,6 +328,22 @@ Now all tasks are complete. Let's check the results! 🚀
 ### 2. Intellij
 
 ![](images/en/intellijServer.png)
+
+## Result
+
+- This is the first screen after logging in.
+
+    ![](images/en/result_init.png)
+
+- By clicking the [Bangkok] button in the top left corner, you can see the view of Bangkok.
+
+    ![](images/en/result_bangkok.png)
+
+- By clicking the Toggle Layer button in the top left, you can control the display of layers.
+
+- If you zoom in on the map, you can see the work results clearly.
+
+    ![](images/en/result_final.png)
 
 ---
 

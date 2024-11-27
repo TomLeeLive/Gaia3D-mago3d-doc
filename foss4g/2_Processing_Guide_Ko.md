@@ -239,17 +239,25 @@ docker run \
 
     ![](images/en/gs_new_stores.png)
 
-3. 사용하려는 데이터 형식 선택합니다 (예: Shapefile, GeoTIFF 등).
+3. 사용하려는 데이터 형식 선택합니다 (예: GeoTIFF, GeoPackage).
 
-    ![]()
+    ![](images/en/gs_select_stores.png)
 
 4. 아래 정보를 입력합니다.
    - **작업 공간**: 이전에 생성한 작업 공간 선택합니다.
-   - **데이터 저장소 이름**: 데이터 저장소 이름 입력합니다. (예: `mago3d_store`).
-   - **연결 파라미터** : 이전에 데이터를 저장한 디렉토리 선택합니다.
+   - **데이터 저장소 이름**: 데이터 저장소 이름 입력합니다. (예: `sentinel`, `transportation`).
+   - **연결 파라미터** : Browse를 클릭하여 이전에 데이터를 저장한 디렉토리 선택합니다.
    
-   ![]()
-   
+   #### Sentinel GeoTiFF 등록 방법
+
+   ![](images/en/gs_stores_sentinel.png)
+   ![](images/en/gs_select_sentinel.png)
+
+    ### Transportation GeoPackage 등록 방법
+
+    ![](images/en/gs_stores_transp.png)
+    ![](images/en/gs_select_transp.png)
+
 5. **저장** 버튼 클릭하여 저장합니다.
 
 ---
@@ -262,22 +270,24 @@ docker run \
 
 2. **새로운 레이어 추가하기** 버튼 클릭합니다.
 
-   ![]()
+   ![](images/en/gs_new_layer.png)
 
 3. 이전 단계에서 생성한 데이터 저장소를 선택합니다.
 
-   ![]()
-
 4. 사용 가능한 데이터 리스트에서 추가하려는 데이터를 선택하고 **발행하기** 클릭합니다.
 
-   ![]()
+   ![](images/en/gs_select_layer.png)
 
 5. 레이어 속성을 설정합니다.
    - **이름**: 레이어 이름. (예시: khlongtoei_transportation / T47PPR_20240430T033541_TCI_10m)
+   
+   ![](images/en/gs_edit_layer_1.png)
+   
    - **공간 좌표 체계**: 데이터의 좌표계 지정 (예: EPSG:4326).
+   
    - **레이어 최소경계 영역**: 데이터로부터 계산하기 클릭하여 적용합니다.
-
-   ![]()
+   
+   ![](images/en/gs_edit_layer_2.png)
 
 6. **저장** 버튼 클릭하여 저장합니다.
 
@@ -291,12 +301,11 @@ docker run \
 
 2. 발행한 레이어를 목록에서 찾습니다.
 
-   ![]()
-
 3. 미리보기 형식(WMS, OpenLayers 등)을 선택하여 클릭합니다.
    - OpenLayers 선택 시 브라우저에서 레이어를 확인할 수 있습니다.
 
-   ![]()
+   ![](images/en/gs_select_preview.png)
+   ![](images/en/gs_preview.png)
 
 ---
 
@@ -320,6 +329,23 @@ docker run \
 ### 2. Intellij  
 
 ![](images/en/intellijServer.png)
+
+## 결과물
+
+- 접속 후 첫 화면입니다.
+
+    ![](images/en/result_init.png)
+
+- 좌측 상단의 **[Bangkok]** 버튼을 눌러 방콕의 모습을 볼 수 있습니다.
+
+    ![](images/en/result_bangkok.png)
+
+- 좌측 상단의 Toggle Layer의 버튼을 클릭하면 layer 표출을 제어할 수 있습니다.
+
+- 지도를 확대하면 작업한 결과물이 잘 나와있는 것을 볼 수 있습니다.
+
+    ![](images/en/result_final.png)
+ 
 
 ---
 
