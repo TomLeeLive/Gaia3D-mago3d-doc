@@ -4,32 +4,139 @@
 
 ## ⚙️ 기본 세팅
 
-### 1. 원하는 경로에 실습을 위해 사용할 파일 생성
+### 1. 원하는 경로에 실습 폴더 생성
 
-- 예를 들어, C:/ 경로에 mago3d 폴더와 workspace 폴더를 생성합니다.
-    ```sql
-    $ C:\Users\user> mkdir ../../mago3d/workspace
-    ```
+실습에 사용할 폴더를 생성합니다.  
+이 폴더는 실습 과정에서 데이터를 저장하고 관리하기 위한 기본 작업 공간이 됩니다.  
+Windows와 Mac/Linux 환경에 맞춰 아래 단계를 따라 진행하세요.
 
-### 2. docker에 필요 항목 다운로드
+### Windows
 
-- cmd 창을 엽니다.
-- mago3d-tiler를 설치합니다.
-    ```sql
-    $ docker pull gaia3d/mago-3d-tiler
-    ```
-- mago3d-terrainer를 설치합니다.
-    ```sql
-    $ docker pull gaia3d/mago-3d-terrainer
-    ```
-- 생성해줬던 디렉터리에 geoserver를 설치합니다.
-    ```spl
-	$ docker run -v C:\mago3d\workspace\geoserver:/apt/geoserver/data_dir -e GEOSEVER_ADMIN_USER=admin -e GEOSERVER_ADMIN_PASSWORD=geoserver -p 8080:8080 kartoza/geoserver
-    ```
+> 1. 명령 프롬프트 실행 
+>   - 시작 메뉴에서 cmd 또는 명령 프롬프트를 검색하여 실행합니다.
+> 2. 아래 명령어를 입력하여 폴더를 생성합니다:
+>    ```sql
+>    C:\> mkdir mago3d
+>    ```
+> 3. 생성된 폴더는 C:\mago3d 경로에 위치합니다.
 
-### 3. Cesium sample code 다운로드
+### Mac / Linux
 
-- scripts 폴더 안에 있는 index.html 파일을 다운 받아서 C:\mago3d\workspace 디렉터리에 넣습니다.
+> 1. 터미널 실행 
+>    - Mac에서는 Launchpad에서, Linux에서는 응용 프로그램 메뉴에서 터미널을 실행합니다.
+> 2. 아래 명령어를 입력하여 폴더를 생성합니다:
+>     ```sql
+>     $ mkdir ~/mago3d
+>    ```
+> 3. 생성된 폴더는 홈 디렉토리(~/mago3d)에 위치합니다.
+
+이제 실습 준비가 완료되었습니다. 다음 단계를 진행하세요! 🚀
+
+---
+
+### 2. Docker 사용
+
+실습에 필요한 Docker 이미지를 다운로드하고 컨테이너를 실행하여 실습 환경을 구성합니다.  
+아래 단계를 차근차근 따라 진행하세요.
+
+#### 1. Docker 이미지 다운로드
+
+실습에 필요한 이미지를 사전에 다운로드받습니다. 아래 명령어를 입력하여 이미지를 로컬로 가져옵니다.  
+
+```sql
+$ docker pull gaia3d/mago-3d-tiler
+$ docker pull gaia3d/mago-3d-terrainer
+$ docker pull ghcr.io/osgeo/gdal:ubuntu-full-3.9.0
+$ docker pull kartoza/geoserver
+```
+
+---
+
+#### 이미지 설명
+
+> - `gaia3d/mago-3d-tiler`: mago3D의 3D 타일링 작업에 사용되는 이미지
+> - `gaia3d/mago-3d-terrainer`: 지형 데이터 처리를 위한 이미지
+> - `kartoza/geoserver`: GeoServer를 통해 공간 데이터를 관리 및 시각화하는 이미지
+> - `ghcr.io/osgeo/gdal`: GDAL 라이브러리로 공간 데이터 처리 기능을 제공하는 이미지
+
+---
+
+#### ⚠️ Mac 사용 중 GeoServer의 권한 문제가 발생한 경우
+
+> 1. 기존 디렉터리를 삭제하고 다시 GeoServer 디렉터리를 생성합니다.
+> 2. `chmod 777 {workspace}/geoserver` 명령어를 실행하여 GeoServer 디렉터리 권한을 변경합니다.
+> 3. 다시 Docker 이미지를 실행합니다.
+
+---
+
+#### 2. Docker 컨테이너 실행
+
+다운로드한 이미지를 기반으로 컨테이너를 실행합니다.  
+아래 명령어를 입력하여 GeoServer 컨테이너를 실행하세요.  
+
+### Windows
+```sql
+$ docker run ^
+  -v C:\mago3d\geoserver:/apt/geoserver/data_dir ^
+  -e GEOSERVER_ADMIN_USER=admin ^
+  -e GEOSERVER_ADMIN_PASSWORD=geoserver ^
+  -p 8080:8080 kartoza/geoserver
+```
+
+### Mac / Linux
+```sql
+$ docker run \
+  -v C:/mago3d/geoserver:/apt/geoserver/data_dir \
+  -e GEOSERVER_ADMIN_USER=admin \
+  -e GEOSERVER_ADMIN_PASSWORD=geoserver \
+  -p 8080:8080 kartoza/geoserver
+```
+
+---
+#### 실행 명령어 설명
+
+> - `-v`: 데이터 디렉토리 볼륨 마운트  
+>    - `C:\mago3d\geoserver` 경로를 GeoServer의 data_dir로 마운트하여 데이터를 저장합니다.  
+> - `-e`: 환경 변수 설정  
+>    - GEOSERVER_ADMIN_USER: 관리자 계정 이름 (admin)  
+>    - GEOSERVER_ADMIN_PASSWORD: 관리자 계정 비밀번호 (geoserver)  
+> - `-p`: 포트 포워딩  
+>    - 8080:8080: 호스트와 컨테이너의 8080 포트를 연결합니다.  
+
+---
+
+### 3. GeoServer 접속 확인
+
+컨테이너 실행 후, 웹 브라우저에서 http://localhost:8080로 접속하여 GeoServer 관리자 화면을 확인하세요.  
+
+> - 관리자 계정 정보:
+>  - 사용자명: admin
+>  - 비밀번호: geoserver
+
+---
+
+### 4. IDE 준비
+
+IDE란 프로그래머가 소프트웨어 코드를 효율적으로 개발하도록 돕는 소프트웨어 애플리케이션입니다.
+
+실습 마지막 챕터에 IDE를 사용하여 결과물을 확인합니다.
+Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
+
+설치가 안되어있으신 분들은 무료로 사용 가능한 https://code.visualstudio.com/ 에서 다운받으세요.
+
+---
+
+이제 Docker 기반 실습 환경이 준비되었습니다! 다음 단계를 진행하세요. 🎉  
+
+---
+
+이번 실습에서는 도시 디지털 트윈 구축을 위한 데이터로 건물, 운송, 위성영상, DEM(디지털 고도 모델) 데이터를 다운로드할 예정입니다.  
+이러한 데이터는 Overture Maps, NASA, Copernicus Data Space Ecosystem과 같은 플랫폼에서 제공되며, 모두 **오픈 데이터(Open Data)**로 접근이 가능합니다.
+
+이 데이터들은 도시의 공간 정보를 입체적으로 표현하고 분석할 수 있는 기초 데이터면서 중요한 자료로,   
+3D, Vector, Raster, Terrain 같은 다양한 데이터 형식을 활용할 수 있습니다.
+
+
 
 ## :globe_with_meridians: Overture Maps 데이터 다운로드
 
@@ -71,7 +178,6 @@
     $ pip install overturemaps
     ```
 
-
 ### 5. Overture Maps 데이터 다운로드
 
 - 가상환경이 활성화된 상태에서, Overture Maps 데이터를 다운로드 하기 위해 cmd 창에서 다음명령어를 입력합니다.
@@ -87,30 +193,12 @@
 
 - 다운로드한 파일은 가상환경을 생성한 디렉토리(C:\mago3d)에 저장됩니다.
 
-## :rocket: NASA DEM 다운로드
 
-### 1. NASA EARTHDATA 접속
-
-- Login 필수입니다.
-- tif 파일 다운로드를 위해 Earthdata Download 앱을 설치해야 합니다. 
-
-[search.earthdata.nasa.gov](https://search.earthdata.nasa.gov/search/granules?p=C1711961296-LPCLOUD&pg[0][v]=f&pg[0][gsk]=-start_date&as[science_keywords][0]=Land%20Surface%3ATopography%3ATerrain%20Elevation%3ADigital%20Elevation/Terrain%20Model%20(Dem)&tl=1723601365!3!!&fst0=Land%20Surface&fsm0=Topography&fs10=Terrain%20Elevation&fs20=Digital%20Elevation/Terrain%20Model%20(Dem))
-
-### 2. 영역 지정
-
-- 다운로드 하고싶은 영역을 오른쪽의 도구를 사용하여 지정합니다.
-
-![](../images/Training_Guide/Nasa_dem_area.png)
-
-### 3. 데이터 다운로드
-
-- 지정한 영역에 해당되는 데이터를 다운로드합니다.
-
-![Nasa_dem_download](../images/Training_Guide/Nasa_dem_download.png)
 
 ## :telescope: Sentinel 영상 다운로드
 
 ### 1. Copernicus Data Space Ecosystem 접속
+
 - Login 필수입니다.
 
 [Copernicus Data Space Ecosystem | Europe's eyes on Earth](https://dataspace.copernicus.eu/)
@@ -136,4 +224,27 @@
 - 원하는 영상을 검색 완료했다면 마우스 버튼을 클릭하여 다운로드합니다.
 
 ![Sentinel_download2](../images/Training_Guide/Sentinel_download2.png)
+
+
+
+## :rocket: NASA DEM 다운로드
+
+### 1. NASA EARTHDATA 접속
+
+- Login 필수입니다.  
+- tif 파일 다운로드를 위해 Earthdata Download 앱을 설치해야 합니다.
+
+[search.earthdata.nasa.gov](https://search.earthdata.nasa.gov/search/granules?p=C1711961296-LPCLOUD&pg[0][v]=f&pg[0][gsk]=-start_date&as[science_keywords][0]=Land%20Surface%3ATopography%3ATerrain%20Elevation%3ADigital%20Elevation/Terrain%20Model%20(Dem)&tl=1723601365!3!!&fst0=Land%20Surface&fsm0=Topography&fs10=Terrain%20Elevation&fs20=Digital%20Elevation/Terrain%20Model%20(Dem))
+
+### 2. 영역 지정
+
+- 다운로드 하고싶은 영역을 오른쪽의 도구를 사용하여 지정합니다.
+
+![](../images/Training_Guide/Nasa_dem_area.png)
+
+### 3. 데이터 다운로드
+
+- 지정한 영역에 해당되는 데이터를 다운로드합니다.
+
+![Nasa_dem_download](../images/Training_Guide/Nasa_dem_download.png)
 

@@ -1,63 +1,167 @@
-# mago3D Data Collection Guide
+# Mago3D Data Collection Guide
 
 # :bookmark_tabs: Data Construction Approach
 
 ## ⚙️ Basic Setup
 
-### 1. Create Files in Desired Path
+### 1. Create Practice Folder in Desired Path
 
-- For example, create mago3d and workspace folders in the C:/ path.
-    ```sql
-    C:\Users\user> mkdir ../../mago3d/workspace
-    ```
+Create a folder to be used for the practice.  
+This folder will serve as the basic workspace for storing and managing data throughout the practice.  
+Follow the steps below according to your Windows or Mac/Linux environment.
 
-### 2. Download Necessary Items in Docker
+### Windows
 
-- Open cmd prompt.
-- Install mago3d-tiler.
-    ```sql
-    $ docker pull gaia3d/mago-3d-tiler
-    ```
-- Install mago3d-terrainer.
-    ```sql
-    $ docker pull gaia3d/mago-3d-terrainer
-    ```
-- Install geoserver in the directory you created.
-    ```sql
-    $ docker run -v C:\mago3d\workspace\geoserver:/apt/geoserver/data_dir -e GEOSEVER_ADMIN_USER=admin -e GEOSERVER_ADMIN_PASSWORD=geoserver -p 8080:8080 kartoza/geoserver
-    ```
+> 1. Open Command Prompt
+>   - Search for and launch cmd or Command Prompt from the start menu.
+> 2. Enter the following command to create the folder:
+>    ```sql
+>    C:\> mkdir mago3d
+>    ```
+> 3. The created folder will be located at C:\mago3d path.
 
-### 3. Download Cesium Sample Code
+### Mac / Linux
 
-- Download the index.html file from the scripts folder and place it in the C:\mago3d\workspace directory.
+> 1. Launch Terminal
+>    - On Mac, launch from Launchpad, on Linux from the applications menu.
+> 2. Enter the following command to create the folder:
+>    ```sql
+>    $ mkdir ~/mago3d
+>    ```
+> 3. The created folder will be located in the home directory (~/mago3d).
 
-## :globe_with_meridians: Overture Maps Data Download
+Practice preparation is now complete. Proceed to the next step! 🚀
+
+---
+
+### 2. Using Docker
+
+Download the Docker images required for the practice and set up the practice environment by running containers.
+Follow the steps below carefully.
+
+#### 1. Download Docker Images
+
+Pre-download the images needed for the practice. Enter the following commands to pull the images locally.
+
+```sql
+$ docker pull gaia3d/mago-3d-tiler
+$ docker pull gaia3d/mago-3d-terrainer
+$ docker pull kartoza/geoserver
+$ docker pull ghcr.io/osgeo/gdal:ubuntu-full-3.9.0
+```
+
+---
+
+#### Image Description
+
+> - `gaia3d/mago-3d-tiler`: Image used for 3D tiling work in mago3d
+> - `gaia3d/mago-3d-terrainer`: Image for terrain data processing
+> - `kartoza/geoserver`: Image for managing and visualizing spatial data through GeoServer
+> - `ghcr.io/osgeo/gdal`: Image providing spatial data processing capabilities with the GDAL library
+
+---
+
+#### ⚠️ If You Encounter Permission Issues with GeoServer on Mac
+
+> 1. Delete the existing directory and create a new GeoServer directory.
+> 2. Run the command `chmod 777 {workspace}/geoserver` to change the permissions of the GeoServer directory.
+> 3. Run the Docker image again.
+
+---
+
+#### 2. Run Docker Containers
+
+Run containers based on the downloaded images.  
+Enter the following command to run the GeoServer container.
+
+### Windows
+```sql
+$ docker run ^
+  -v C:\mago3d\geoserver:/apt/geoserver/data_dir ^
+  -e GEOSERVER_ADMIN_USER=admin ^
+  -e GEOSERVER_ADMIN_PASSWORD=geoserver ^
+  -p 8080:8080 kartoza/geoserver
+```
+
+### Mac / Linux
+```sql
+$ docker run \
+  -v C:/mago3d/geoserver:/apt/geoserver/data_dir \
+  -e GEOSERVER_ADMIN_USER=admin \
+  -e GEOSERVER_ADMIN_PASSWORD=geoserver \
+  -p 8080:8080 kartoza/geoserver
+```
+
+---
+#### Command Explanation
+>
+> - `-v`: Data directory volume mount
+>    - Mount the `C:\mago3d\geoserver` path to GeoServer's data_dir to store data.
+> - `-e`: Environment variable setting
+>    - GEOSERVER_ADMIN_USER: Admin account name (admin)
+>    - GEOSERVER_ADMIN_PASSWORD: Admin account password (geoserver)
+> - `-p`: Port forwarding
+>    - 8080:8080: Connect host and container's 8080 ports.
+
+---
+
+### 3. Verify GeoServer Access
+
+After running the container, access the GeoServer admin screen via http://localhost:8080 in your web browser.
+
+> - Admin account information:
+>  - Username: admin
+>  - Password: geoserver
+
+---
+
+### 4. IDE Setup
+
+An IDE (Integrated Development Environment) is a tool that helps programmers write and manage code more efficiently.  
+In the final chapter of this practice, you’ll use an IDE to see the results of your work.  
+We recommend using Visual Studio Code or IntelliJ.  
+
+If you haven’t installed one yet, you can download Visual Studio Code for free from https://code.visualstudio.com/.
+
+---
+
+The Docker-based practice environment is now ready! Proceed to the next step. 🎉
+
+---
+
+In this practice, we will download data for urban digital twin construction, including building, transportation, satellite imagery, and DEM (Digital Elevation Model) data.  
+These data are available from platforms like Overture Maps, NASA, and Copernicus Data Space Ecosystem, all accessible as **Open Data**.
+
+These data serve as fundamental and important resources for representing and analyzing urban spatial information three-dimensionally, utilizing various data formats such as 3D, Vector, Raster, and Terrain.
+
+
+## :globe_with_meridians: Downloading Overture Maps Data
 
 ### 1. Verify Python Installation
 
 - [Install Python](https://www.python.org/downloads/)
-- Open cmd prompt and verify Python installation. Enter the following command.
+- Open cmd and check if Python is installed. Enter the following command:
     ```sql
     $ python --version
     ```
 
 ### 2. Create Virtual Environment
 
-- Navigate to the directory where you want to create the virtual environment in the cmd prompt. To move to the previously created directory, enter:
+- Navigate to the directory where you want to create the virtual environment. To move to the directory we created earlier, enter:
     ```sql
     $ cd C:\mago3d
     ```
 
-- Enter the following command to create a virtual environment.
+- Enter the following command to create a virtual environment:
     ```sql
     $ python -m venv myvenv
     ```
 
-- Here, 'myvenv' is the name of the virtual environment. You can change it to your preferred name.
+- 'myvenv' is the name of the virtual environment. You can change it to your preferred name.
 
 ### 3. Activate Virtual Environment
 
-- To activate the virtual environment, enter the following command in the cmd prompt.
+- To activate the virtual environment, enter the following command in the cmd:
     ```sql
     $ myvenv\Scripts\activate
     ```
@@ -66,27 +170,48 @@
 
 ### 4. Install Overture Maps Package
 
-- With the virtual environment activated, enter the following command in the cmd prompt to install the Overture Maps package.
+- With the virtual environment activated, enter the following command to install the Overture Maps package:
     ```sql
     $ pip install overturemaps
     ```
 
 ### 5. Download Overture Maps Data
 
-- With the virtual environment activated, download Overture Maps data by entering the following commands in the cmd prompt.
-- Download Building data for Bangkok to khlongtoei_building.geojson file.
+- With the virtual environment activated, enter the following commands to download Overture Maps data:
+- Download Bangkok's Building data as khlongtoei_building.geojson:
     ```sql
     $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=building -o khlongtoei_building.geojson
     ```
 
-- Download transportation data for Bangkok to khlongtoei_transportation.geojson file.
+- Download Bangkok's transportation data as khlongtoei_transportation.geojson:
     ```sql
     $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=segment -o khlongtoei_transportation.geojson
     ```
 
-- Downloaded files will be saved in the directory where you created the virtual environment (C:\mago3d).
+- The downloaded files will be saved in the directory where you created the virtual environment (C:\mago3d).
 
-## :rocket: NASA DEM Download
+
+
+## :telescope: Downloading Sentinel Images
+
+### 1. Access Copernicus Data Space Ecosystem
+
+- Login is required.
+
+[Copernicus Data Space Ecosystem | Europe's eyes on Earth](https://dataspace.copernicus.eu/)
+
+### 2. Set Data Search Conditions
+
+- Move to the desired area, zoom in, click the search button, select SENTINEL-2 > MSI > L2A, and adjust cloud cover to 5%.
+
+### 3. Download Data
+
+- The list of searched images and their coverage will appear on the screen.
+- Once you've found the desired image, click to download.
+
+
+
+## :rocket: Download NASA DEM
 
 ### 1. Access NASA EARTHDATA
 
@@ -97,43 +222,9 @@
 
 ### 2. Specify Area
 
-- Use the tool on the right to specify the area you want to download.
-
-![](../images/Training_Guide/Nasa_dem_area.png)
+- Use the tools on the right to specify the area you want to download.
 
 ### 3. Download Data
 
 - Download the data corresponding to the specified area.
-
-![Nasa_dem_download](../images/Training_Guide/Nasa_dem_download.png)
-
-## :telescope: Sentinel Image Download
-
-### 1. Access Copernicus Data Space Ecosystem
-
-- Login is required.
-
-[Copernicus Data Space Ecosystem | Europe's eyes on Earth](https://dataspace.copernicus.eu/)
-
-![Sentinel_home](../images/Training_Guide/Sentinel_home.png)
-
-### 2. Set Data Search Conditions
-
-- Move to the desired location and zoom in, then click the search button and adjust SENTINEL-2>MSI>L2A>Cloud Cover to 5%.
-
-![Sentinel_search1](../images/Training_Guide/Sentinel_search1.png)
-
-- Specify the date and click the Search button.
-
-![Sentinel_search2](../images/Training_Guide/Sentinel_search2.png)
-
-### 3. Download Data
-
-- The list of searched images and the range of Sentinel images will appear on the screen.
-
-![Sentinel_download1](../images/Training_Guide/Sentinel_download1.png)
-
-- Once you have found the desired image, click the mouse button to download.
-
-![Sentinel_download2](../images/Training_Guide/Sentinel_download2.png)
 
