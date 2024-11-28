@@ -1,6 +1,6 @@
 # Mago3D Data Collection Guide
 
-# :bookmark_tabs: Data Construction Approach
+## :bookmark_tabs: Data Construction Approach
 
 ## ⚙️ Basic Setup
 
@@ -44,10 +44,10 @@ Follow the steps below carefully.
 Pre-download the images needed for the practice. Enter the following commands to pull the images locally.
 
 ```sql
-$ docker pull gaia3d/mago-3d-tiler
-$ docker pull gaia3d/mago-3d-terrainer
-$ docker pull kartoza/geoserver
-$ docker pull ghcr.io/osgeo/gdal:ubuntu-full-3.9.0
+docker pull gaia3d/mago-3d-tiler
+docker pull gaia3d/mago-3d-terrainer
+docker pull kartoza/geoserver
+docker pull ghcr.io/osgeo/gdal:ubuntu-full-3.9.0
 ```
 
 ---
@@ -75,8 +75,9 @@ Run containers based on the downloaded images.
 Enter the following command to run the GeoServer container.
 
 ### Windows
-```sql
-$ docker run ^
+
+```sh
+docker run ^
   -v C:\mago3d\geoserver:/apt/geoserver/data_dir ^
   -e GEOSERVER_ADMIN_USER=admin ^
   -e GEOSERVER_ADMIN_PASSWORD=geoserver ^
@@ -84,8 +85,8 @@ $ docker run ^
 ```
 
 ### Mac / Linux
-```sql
-$ docker run \
+```sh
+docker run \
   -v C:/mago3d/geoserver:/apt/geoserver/data_dir \
   -e GEOSERVER_ADMIN_USER=admin \
   -e GEOSERVER_ADMIN_PASSWORD=geoserver \
@@ -93,15 +94,16 @@ $ docker run \
 ```
 
 ---
+
 #### Command Explanation
->
+
 > - `-v`: Data directory volume mount
->    - Mount the `C:\mago3d\geoserver` path to GeoServer's data_dir to store data.
+>   - Mount the `C:\mago3d\geoserver` path to GeoServer's data_dir to store data.
 > - `-e`: Environment variable setting
->    - GEOSERVER_ADMIN_USER: Admin account name (admin)
->    - GEOSERVER_ADMIN_PASSWORD: Admin account password (geoserver)
+>   - GEOSERVER_ADMIN_USER: Admin account name (admin)
+>   - GEOSERVER_ADMIN_PASSWORD: Admin account password (geoserver)
 > - `-p`: Port forwarding
->    - 8080:8080: Connect host and container's 8080 ports.
+>   - 8080:8080: Connect host and container's 8080 ports.
 
 ---
 
@@ -110,8 +112,8 @@ $ docker run \
 After running the container, access the GeoServer admin screen via http://localhost:8080 in your web browser.
 
 > - Admin account information:
->  - Username: admin
->  - Password: geoserver
+>   - Username: admin
+>   - Password: geoserver
 
 ---
 
@@ -141,20 +143,23 @@ These data serve as fundamental and important resources for representing and ana
 
 - [Install Python](https://www.python.org/downloads/)
 - Open cmd and check if Python is installed. Enter the following command:
-    ```sql
-    $ python --version
+
+    ```sh
+    python --version
     ```
 
 ### 2. Create Virtual Environment
 
 - Navigate to the directory where you want to create the virtual environment. To move to the directory we created earlier, enter:
-    ```sql
-    $ cd C:\mago3d
+
+    ```sh
+    cd C:\mago3d
     ```
 
 - Enter the following command to create a virtual environment:
-    ```sql
-    $ python -m venv myvenv
+
+    ```sh
+    python -m venv myvenv
     ```
 
 - 'myvenv' is the name of the virtual environment. You can change it to your preferred name.
@@ -162,8 +167,14 @@ These data serve as fundamental and important resources for representing and ana
 ### 3. Activate Virtual Environment
 
 - To activate the virtual environment, enter the following command in the cmd:
-    ```sql
+
+    ```sh
     $ myvenv\Scripts\activate
+    ```
+
+    ```sh
+    # linux/mac
+    source myenv/bin/activate
     ```
 
 - After executing this command, the prompt will change to '(myvenv)', indicating the virtual environment is activated.
@@ -171,26 +182,35 @@ These data serve as fundamental and important resources for representing and ana
 ### 4. Install Overture Maps Package
 
 - With the virtual environment activated, enter the following command to install the Overture Maps package:
-    ```sql
-    $ pip install overturemaps
+
+    ```sh
+    pip install overturemaps
     ```
 
 ### 5. Download Overture Maps Data
 
 - With the virtual environment activated, enter the following commands to download Overture Maps data:
 - Download Bangkok's Building data as khlongtoei_building.geojson:
-    ```sql
-    $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=building -o khlongtoei_building.geojson
+ 
+    ```sh
+    overturemaps download \
+        --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 \
+        -f geojson \
+        --type=building \
+        -o khlongtoei_building.geojson
     ```
 
 - Download Bangkok's transportation data as khlongtoei_transportation.geojson:
-    ```sql
-    $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=segment -o khlongtoei_transportation.geojson
+
+    ```sh
+    overturemaps download \
+        --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 \
+        -f geojson \
+        --type=segment \
+        -o khlongtoei_transportation.geojson
     ```
 
 - The downloaded files will be saved in the directory where you created the virtual environment (C:\mago3d).
-
-
 
 ## :telescope: Downloading Sentinel Images
 
@@ -224,7 +244,6 @@ These data serve as fundamental and important resources for representing and ana
 
 - Use the tools on the right to specify the area you want to download.
 
-### 3. Download Data
+### 3. DEM Download Data
 
 - Download the data corresponding to the specified area.
-
