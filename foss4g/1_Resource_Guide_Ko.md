@@ -43,7 +43,7 @@ Windows와 Mac/Linux 환경에 맞춰 아래 단계를 따라 진행하세요.
 
 실습에 필요한 이미지를 사전에 다운로드받습니다. 아래 명령어를 입력하여 이미지를 로컬로 가져옵니다.  
 
-```sql
+```shell
 $ docker pull gaia3d/mago-3d-tiler
 $ docker pull gaia3d/mago-3d-terrainer
 $ docker pull ghcr.io/osgeo/gdal:ubuntu-full-3.9.0
@@ -75,18 +75,18 @@ $ docker pull kartoza/geoserver
 아래 명령어를 입력하여 GeoServer 컨테이너를 실행하세요.  
 
 ### Windows
-```sql
+```shell
 $ docker run ^
-  -v C:\mago3d\geoserver:/apt/geoserver/data_dir ^
+  -v C:\mago3d\geoserver:/opt/geoserver/data_dir ^
   -e GEOSERVER_ADMIN_USER=admin ^
   -e GEOSERVER_ADMIN_PASSWORD=geoserver ^
   -p 8080:8080 kartoza/geoserver
 ```
 
 ### Mac / Linux
-```sql
+```shell
 $ docker run \
-  -v C:/mago3d/geoserver:/apt/geoserver/data_dir \
+  -v C:/mago3d/geoserver:/opt/geoserver/data_dir \
   -e GEOSERVER_ADMIN_USER=admin \
   -e GEOSERVER_ADMIN_PASSWORD=geoserver \
   -p 8080:8080 kartoza/geoserver
