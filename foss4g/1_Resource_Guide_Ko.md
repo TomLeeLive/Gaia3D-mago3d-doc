@@ -77,10 +77,10 @@ $ docker pull kartoza/geoserver
 ### Windows
 ```shell
 $ docker run ^
-  -v C:\mago3d\geoserver:/opt/geoserver/data_dir ^
+  -v C:\workspace\geoserver:/opt/geoserver/data_dir ^
   -e GEOSERVER_ADMIN_USER=admin ^
   -e GEOSERVER_ADMIN_PASSWORD=geoserver ^
-  -p 8080:8080 kartoza/geoserver
+  -p 8080:8080 --name geoserver kartoza/geoserver
 ```
 
 ### Mac / Linux
@@ -89,7 +89,7 @@ $ docker run \
   -v C:/mago3d/geoserver:/opt/geoserver/data_dir \
   -e GEOSERVER_ADMIN_USER=admin \
   -e GEOSERVER_ADMIN_PASSWORD=geoserver \
-  -p 8080:8080 kartoza/geoserver
+  -p 8080:8080 --name geoserver kartoza/geoserver
 ```
 
 ---
