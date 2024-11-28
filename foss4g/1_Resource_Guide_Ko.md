@@ -86,7 +86,7 @@ $ docker run ^
 ### Mac / Linux
 ```shell
 $ docker run \
-  -v C:/mago3d/geoserver:/opt/geoserver/data_dir \
+  -v ~/mago3d/geoserver:/opt/geoserver/data_dir \
   -e GEOSERVER_ADMIN_USER=admin \
   -e GEOSERVER_ADMIN_PASSWORD=geoserver \
   -p 8080:8080 --name geoserver kartoza/geoserver
