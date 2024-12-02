@@ -35,7 +35,7 @@ Generate a localhost certificate using [mkcert](https://github.com/FiloSottile/m
   cd install/traefik/certs
   ```
   ```cmd
-    mkcert -cert-file default.crt -key-file default.key localhost dev.localhost *.localhost
+  mkcert -cert-file default.crt -key-file default.key localhost dev.localhost *.localhost
   ```
 
 If a certificate is installed on the server
