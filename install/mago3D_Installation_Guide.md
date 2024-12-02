@@ -8,10 +8,10 @@ This document provides instructions on how to install mago3D using Docker Compos
 * An environment with Docker installed
 * An environment with a localhost certificate installed
 
-Start the Docker daemon.
-For Windows, launch Docker Desktop.
-For Mac, launch Docker Desktop.
-For Linux, start the Docker service.
+Start the Docker daemon.  
+For Windows, launch Docker Desktop.  
+For Mac, launch Docker Desktop.  
+For Linux, start the Docker service.  
 
 ### How to Install Certificate
 Generate a localhost certificate using [mkcert](https://github.com/FiloSottile/mkcert)
@@ -35,7 +35,7 @@ Generate a localhost certificate using [mkcert](https://github.com/FiloSottile/m
   cd install/traefik/certs
   ```
   ```cmd
-    mkcert -cert-file default.crt -key-file default.key localhost dev.localhost *.localhost
+  mkcert -cert-file default.crt -key-file default.key localhost dev.localhost *.localhost
   ```
 
 If a certificate is installed on the server
