@@ -186,12 +186,6 @@ services:
         <<: *logging-fluentd
         tag: docker.minio
 
-    # 로컬 환경에서 DOMAIN의 값을 dev.localhost으로 설정할 경우, 이는 docker DNS에서 찾을 수 없는 호스트명이다.
-    # 따라서, ${DOMAIN}명을 Network alias로 추가한다.
-#    networks:
-#      default:
-#        aliases:
-#          - ${DOMAIN}
   traefik:
     command:
       - --global.checknewversion=false
@@ -211,35 +205,24 @@ services:
       - --providers.file.directory=/etc/traefik/conf.d
       - --providers.docker.endpoint=unix:///var/run/docker.sock
       - --providers.docker.exposedByDefault=false
-      - --providers.docker.network=mdtp
+      - --providers.docker.network=mago3d
 
       # web entrypoint
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
       - --entrypoints.web.http.redirections.entrypoint.permanent=true
+
       # websecure entrypoint
       - --entrypoints.websecure.address=:443
-#      - --entrypoints.websecure.http.tls=true
       - --entrypoints.websecure.http.tls.certResolver=le
-      # registry entrypoint
-#      - --entrypoints.registry.address=:5001
-#      - --entrypoints.registry.http.tls=true
+
       # minio entrypoint
       - --entrypoints.minio.address=:9000
       - --entrypoints.minio.http.tls=false
 
-      # Certificate
-      - --certificatesresolvers.le.acme.tlschallenge=true
-      - --certificatesresolvers.le.acme.email=yhjeong@gaia3d.com
-      - --certificatesresolvers.le.acme.storage=/letsencrypt/acme.json
-#      - --certificatesresolvers.le.acme.httpchallenge=true
-#      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
-      # Let's encrypt 인증 제한을 피하기 위해서 테스트용으로 사용하는 caServer (https://letsencrypt.org/docs/staging-environment)
-#      - --certificatesresolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
     volumes:
       - ./traefik/certs:/etc/certs:ro
-      - ./letsencrypt:/letsencrypt
     labels:
       - traefik.enable=true
       - traefik.http.routers.traefik.rule=Host(`${DOMAIN}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
@@ -251,13 +234,6 @@ services:
       - traefik.http.middlewares.traefik-trailingSlash.redirectRegex.replacement=$1/
       - traefik.http.middlewares.traefik-trailingSlash.redirectRegex.permanent=true
 
-#
-#      # Middlewares
-#      - traefik.http.middlewares.stripFirstPrefix.stripPrefixRegex.regex=^/[^/]+
-#      - traefik.http.middlewares.redirectTrailingSlash.redirectRegex.regex=^(https?://[^/]+/[^/]+)$$$$
-#      - traefik.http.middlewares.redirectTrailingSlash.redirectRegex.replacement=$$$$1/
-#      - traefik.http.middlewares.redirectTrailingSlash.redirectRegex.permanent=true
-#      - traefik.http.middlewares.retryable.retry.attempts=3
     logging:
       driver: fluentd
       options:
