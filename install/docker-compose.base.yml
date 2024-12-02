@@ -55,12 +55,26 @@ services:
     environment:
       - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=http://configrepo:3000/git/config.git
       - ENCRYPT_KEY=gaia3d
+    networks: *networks
+
+  healthcheck:
+    image: alpine:latest
+    command: >
+      sh -c "
+      apk add --no-cache curl &&
+      while ! curl -s -f http://configserver:8888/actuator/health > /dev/null; do
+        echo 'Waiting for service to be ready...';
+        sleep 5;
+      done;
+      echo 'Service is up!';
+      sleep infinity
+      "
     healthcheck:
-      test: curl -f http://localhost:8888/actuator/health || exit 1
+      test: [ "CMD", "curl", "-f", "http://configserver:8888/actuator/health" ]
       interval: 10s
       timeout: 5s
-      retries: 10
-      start_period: 30s
+      retries: 3
+      start_period: 5s
     networks: *networks
 
   postgresql:

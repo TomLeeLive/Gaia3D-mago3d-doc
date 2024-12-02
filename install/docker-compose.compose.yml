@@ -64,6 +64,10 @@ services:
         <<: *logging-fluentd
         tag: docker.configserver
 
+  healthcheck:
+    depends_on:
+      - configserver
+
   postgresql:
     environment:
       - TZ=Asia/Seoul
@@ -264,28 +268,28 @@ services:
     environment:
       <<: *env
     depends_on:
-      configserver:
+      healthcheck:
         condition: service_healthy
 
   f4d-converter:
     environment:
       <<: *env
     depends_on:
-      configserver:
+      healthcheck:
         condition: service_healthy
 
   t3d-converter:
     environment:
       <<: *env
     depends_on:
-      configserver:
+      healthcheck:
         condition: service_healthy
 
   terrain-converter:
     environment:
       <<: *env
     depends_on:
-      configserver:
+      healthcheck:
         condition: service_healthy
 
   dataset:
@@ -302,7 +306,7 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
-      configserver:
+      healthcheck:
           condition: service_healthy
 
 
@@ -320,7 +324,7 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
-      configserver:
+      healthcheck:
         condition: service_healthy
 
   layerset:
@@ -337,7 +341,7 @@ services:
     depends_on:
       postgresql:
         condition: service_healthy
-      configserver:
+      healthcheck:
         condition: service_healthy
 
   apidoc:
