@@ -1,6 +1,6 @@
 # mago3D 데이터 수집 가이드
 
-# :bookmark_tabs: 데이터 구축 방안
+## :bookmark_tabs: 데이터 구축 방안
 
 ## ⚙️ 기본 세팅
 
@@ -43,11 +43,11 @@ Windows와 Mac/Linux 환경에 맞춰 아래 단계를 따라 진행하세요.
 
 실습에 필요한 이미지를 사전에 다운로드받습니다. 아래 명령어를 입력하여 이미지를 로컬로 가져옵니다.  
 
-```shell
-$ docker pull gaia3d/mago-3d-tiler
-$ docker pull gaia3d/mago-3d-terrainer
-$ docker pull ghcr.io/osgeo/gdal:ubuntu-full-3.9.0
-$ docker pull kartoza/geoserver
+```sh
+docker pull gaia3d/mago-3d-tiler
+docker pull gaia3d/mago-3d-terrainer
+docker pull ghcr.io/osgeo/gdal:ubuntu-full-3.9.0
+docker pull kartoza/geoserver
 ```
 
 ---
@@ -75,8 +75,9 @@ $ docker pull kartoza/geoserver
 아래 명령어를 입력하여 GeoServer 컨테이너를 실행하세요.  
 
 ### Windows
-```shell
-$ docker run ^
+
+```sh
+docker run ^
   -v C:\workspace\geoserver:/opt/geoserver/data_dir ^
   -e GEOSERVER_ADMIN_USER=admin ^
   -e GEOSERVER_ADMIN_PASSWORD=geoserver ^
@@ -84,8 +85,9 @@ $ docker run ^
 ```
 
 ### Mac / Linux
-```shell
-$ docker run \
+
+```sh
+docker run \
   -v ~/mago3d/geoserver:/opt/geoserver/data_dir \
   -e GEOSERVER_ADMIN_USER=admin \
   -e GEOSERVER_ADMIN_PASSWORD=geoserver \
@@ -93,25 +95,26 @@ $ docker run \
 ```
 
 ---
+
 #### 실행 명령어 설명
 
 > - `-v`: 데이터 디렉토리 볼륨 마운트  
->    - `C:\mago3d\geoserver` 경로를 GeoServer의 data_dir로 마운트하여 데이터를 저장합니다.  
+>   - `C:\mago3d\geoserver` 경로를 GeoServer의 data_dir로 마운트하여 데이터를 저장합니다.  
 > - `-e`: 환경 변수 설정  
->    - GEOSERVER_ADMIN_USER: 관리자 계정 이름 (admin)  
->    - GEOSERVER_ADMIN_PASSWORD: 관리자 계정 비밀번호 (geoserver)  
+>   - GEOSERVER_ADMIN_USER: 관리자 계정 이름 (admin)  
+>   - GEOSERVER_ADMIN_PASSWORD: 관리자 계정 비밀번호 (geoserver)  
 > - `-p`: 포트 포워딩  
->    - 8080:8080: 호스트와 컨테이너의 8080 포트를 연결합니다.  
+>   - 8080:8080: 호스트와 컨테이너의 8080 포트를 연결합니다.  
 
 ---
 
 ### 3. GeoServer 접속 확인
 
-컨테이너 실행 후, 웹 브라우저에서 http://localhost:8080로 접속하여 GeoServer 관리자 화면을 확인하세요.  
+컨테이너 실행 후, 웹 브라우저에서 [http://localhost:8080](http://localhost:8080)로 접속하여 GeoServer 관리자 화면을 확인하세요.  
 
 > - 관리자 계정 정보:
->  - 사용자명: admin
->  - 비밀번호: geoserver
+>   - 사용자명: admin
+>   - 비밀번호: geoserver
 
 ---
 
@@ -133,10 +136,7 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 이번 실습에서는 도시 디지털 트윈 구축을 위한 데이터로 건물, 운송, 위성영상, DEM(디지털 고도 모델) 데이터를 다운로드할 예정입니다.  
 이러한 데이터는 Overture Maps, NASA, Copernicus Data Space Ecosystem과 같은 플랫폼에서 제공되며, 모두 **오픈 데이터(Open Data)** 로 접근이 가능합니다.
 
-이 데이터들은 도시의 공간 정보를 입체적으로 표현하고 분석할 수 있는 기초 데이터면서 중요한 자료로,   
-3D, Vector, Raster, Terrain 같은 다양한 데이터 형식을 활용할 수 있습니다.
-
-
+이 데이터들은 도시의 공간 정보를 입체적으로 표현하고 분석할 수 있는 기초 데이터면서 중요한 자료로, 3D, Vector, Raster, Terrain 같은 다양한 데이터 형식을 활용할 수 있습니다.
 
 ## :globe_with_meridians: Overture Maps 데이터 다운로드
 
@@ -144,20 +144,23 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 
 - [Python을 설치합니다](https://www.python.org/downloads/)
 - cmd 창을 열고 Python이 설치되었는지 확인합니다. 다음 명령어를 입력하세요.
-    ```sql
-    $ python --version
+
+    ```sh
+    python --version
     ```
 
 ### 2. 가상환경 생성
 
 - cmd 창에서 가상환경을 생성하려는 디렉터리로 이동합니다. 아까 생성해준 디렉터리로 이동하려면 다음 명령어를 입력하세요.
-    ```sql
-    $ cd C:\mago3d
+
+    ```sh
+    cd C:\mago3d
     ```
 
 - 다음 명령어를 입력하여 가상환경을 생성합니다.
-    ```sql
-    $ python -m venv myvenv
+
+    ```sh
+    python -m venv myvenv
     ```
 
 - 여기서 ‘myvenv’는 가상환경의 이름입니다. 원하는 이름으로 변경할 수 있습니다.
@@ -165,8 +168,14 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 ### 3. 가상환경 활성
 
 - 가상환경을 활성화하려면 cmd 창에서 다음 명령어를 입력합니다.
-    ```sql
-    $ myvenv\Scripts\activate
+
+    ```sh
+    myvenv\Scripts\activate
+    ```
+
+    ```sh
+    # linux/mac
+    source myenv/bin/activate
     ```
 
 - 위 명령어를 실행하면, 프롬프트가 ‘(myvenv)’와 같이 변경되어 가상환경이 활성화된 것을 알 수 있습니다.
@@ -174,26 +183,35 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 ### 4. Overture Maps 패키지 설치
 
 - 가상환경이 활성화된 상태에서, Overture Maps 패키지를 설치하기 위해 cmd 창에서 다음 명령어를 입력합니다.
-    ```sql
-    $ pip install overturemaps
+
+    ```sh
+    pip install overturemaps
     ```
 
 ### 5. Overture Maps 데이터 다운로드
 
 - 가상환경이 활성화된 상태에서, Overture Maps 데이터를 다운로드 하기 위해 cmd 창에서 다음명령어를 입력합니다.
 - 방콕의 Building 데이터를 khlongtoei_building.geojson 파일로 다운로드합니다.
-    ```sql
-    $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=building -o khlongtoei_building.geojson
+
+    ```sh
+    overturemaps download \
+        --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 \
+        -f geojson \
+        --type=building \
+        -o khlongtoei_building.geojson
     ```
 
 - 방콕의 transportation 데이터를 khlongtoei_transportation.geojson 파일로 다운로드합니다.
-    ```sql
-    $ overturemaps download --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 -f geojson --type=segment -o khlongtoei_transportation.geojson
+
+    ```sh
+    overturemaps download \
+        --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 \
+        -f geojson \
+        --type=segment \
+        -o khlongtoei_transportation.geojson
     ```
 
 - 다운로드한 파일은 가상환경을 생성한 디렉토리(C:\mago3d)에 저장됩니다.
-
-
 
 ## :telescope: Sentinel 영상 다운로드
 
@@ -225,8 +243,6 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 
 ![Sentinel_download2](../images/Training_Guide/Sentinel_download2.png)
 
-
-
 ## :rocket: NASA DEM 다운로드
 
 ### 1. NASA EARTHDATA 접속
@@ -240,11 +256,10 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 
 - 다운로드 하고싶은 영역을 오른쪽의 도구를 사용하여 지정합니다.
 
-![](../images/Training_Guide/Nasa_dem_area.png)
+![Nasa_dem_area](../images/Training_Guide/Nasa_dem_area.png)
 
-### 3. 데이터 다운로드
+### 3. DEM 데이터 다운로드
 
 - 지정한 영역에 해당되는 데이터를 다운로드합니다.
 
 ![Nasa_dem_download](../images/Training_Guide/Nasa_dem_download.png)
-
