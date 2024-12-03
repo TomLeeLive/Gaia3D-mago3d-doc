@@ -144,40 +144,39 @@ Data processing is now complete. Proceed to the next step! 🚀
     - input> khlongtoei_building.geojson
     - dem> ASTGTMV003_N13E100_dem.tif
 
-## MAGO3D-TILER
+## mago3DTiler
 
-- Run mago3d-tiler with the default building height set to 3.3m.
-- Depending on computer specifications and network, it may take a minimum of 7 minutes.
+Run mago3d-tiler with the default building height set to 3.3m.  
+Depending on computer specifications and network, it may take a minimum of 7 minutes.
 
-### Windows
+- Windows
+    ```sh
+    docker run ^
+      --rm ^
+      -v C:\mago3d\workspace:/workspace gaia3d/mago-3d-tiler ^
+      -input /workspace/input ^
+      -output /workspace/output ^
+      -it geojson ^
+      -crs 4326 ^
+      -te /workspace/dem/ASTGTMV003_N13E100_dem.tif ^
+      -mh 3.3 ^
+      -hc height
+    ```
 
-```sh
-docker run ^
-  --rm ^
-  -v C:\mago3d\workspace:/workspace gaia3d/mago-3d-tiler ^
-  -input /workspace/input ^
-  -output /workspace/output ^
-  -it geojson ^
-  -crs 4326 ^
-  -te /workspace/dem/ASTGTMV003_N13E100_dem.tif ^
-  -mh 3.3 ^
-  -hc height
-```
-
-### Mac / Linux
-
-```sh
-docker run \
-  --rm \
-  -v ~/mago3d/workspace:/workspace gaia3d/mago-3d-tiler \
-  -input /workspace/input \
-  -output /workspace/output \
-  -it geojson \
-  -crs 4326 \
-  -te /workspace/dem/ASTGTMV003_N13E100_dem.tif \
-  -mh 3.3 \
-  -hc height
-```
+- Mac / Linux
+    ```sh
+    docker run \
+      --rm \
+      -v ~/mago3d/workspace:/workspace gaia3d/mago-3d-tiler \
+      -input /workspace/input \
+      -output /workspace/output \
+      -it geojson \
+      -crs 4326 \
+      -te /workspace/dem/ASTGTMV003_N13E100_dem.tif \
+      -mh 3.3 \
+      -hc height
+    ```
+  
 <br/>
 
 > ### Command Explanation
@@ -198,38 +197,37 @@ docker run \
 <br/>
 
 ---
-## MAGO3D-TERRAINER
+## mago3DTerrainer
 
-- Run mago3d-terrainer with the maximum terrain depth set to 14.
-- Depending on computer specifications and network, it may take a minimum of 10 minutes.
+Run mago3d-terrainer with the maximum terrain depth set to 14.  
+Depending on computer specifications and network, it may take a minimum of 10 minutes.
 
-### Windows
+- Windows
+    ```sh
+    docker run ^
+      --rm ^
+      -v C:\mago3d\workspace:/workspace gaia3d/mago-3d-terrainer ^
+      -input /workspace/dem ^
+      -output /workspace/assets/terrain ^
+      -cn ^
+      -it bilinear ^
+      -mn 0 ^
+      -mx 14
+    ```
 
-```sh
-docker run ^
-  --rm ^
-  -v C:\mago3d\workspace:/workspace gaia3d/mago-3d-terrainer ^
-  -input /workspace/dem ^
-  -output /workspace/assets/terrain ^
-  -cn ^
-  -it bilinear ^
-  -mn 0 ^
-  -mx 14
-```
-
-### Mac / Linux
-
-```sh
-docker run \
-  --rm \
-  -v ~/mago3d/workspace:/workspace gaia3d/mago-3d-terrainer \
-  -input /workspace/dem \
-  -output /workspace/assets/terrain \
-  -cn \
-  -it bilinear \
-  -mn 0 \
-  -mx 14
-```
+- Mac / Linux
+    ```sh
+    docker run \
+      --rm \
+      -v ~/mago3d/workspace:/workspace gaia3d/mago-3d-terrainer \
+      -input /workspace/dem \
+      -output /workspace/assets/terrain \
+      -cn \
+      -it bilinear \
+      -mn 0 \
+      -mx 14
+    ```
+  
 <br/>
 
 ### Command Explanation

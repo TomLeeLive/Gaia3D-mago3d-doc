@@ -10,25 +10,24 @@ Create a folder for the practical exercise.
 This folder will serve as the basic workspace for storing and managing data during the practice.  
 Follow the steps below according to Windows and Mac/Linux environments.
 
-> ### Windows
->
-> 1. Run Command Prompt
->   - Search for and run cmd or Command Prompt from the Start menu.
-> 2. Enter the following command to create a folder:
->    ```sh
->    C:\> mkdir mago3d
->    ```
-> 3. The created folder is located at the path C:\mago3d.
+- Windows
+  1. Run Command Prompt
+     - Search for and run cmd or Command Prompt from the Start menu.
+  2. Enter the following command to create a folder:
+     ```sh
+     C:\> mkdir mago3d
+     ```
+  3. The created folder is located at the path C:\mago3d.
 
-> ### Mac / Linux
->
-> 1. Launch Terminal
->    - Launch Terminal from Launchpad on Mac, or from the applications menu on Linux.
-> 2. Enter the following command to create a folder:
->     ```sh
->     $ mkdir ~/mago3d
->    ```
-> 3. The created folder is located in the home directory `~/mago3d`.
+
+- Mac / Linux
+  1. Launch Terminal
+     - Launch Terminal from Launchpad on Mac, or from the applications menu on Linux.
+  2. Enter the following command to create a folder:
+      ```sh
+      $ mkdir ~/mago3d
+      ```
+  3. The created folder is located in the home directory `~/mago3d`.
 
 <br/>
 The practical preparation is now complete. Proceed to the next step! 🚀
@@ -150,7 +149,7 @@ These data serve as fundamental and important materials for representing and ana
 
 - [Install Python](https://www.python.org/downloads/)
 
-> #### ⚙️ Installation Checklist
+> ### 📢 Installation Checklist
 >
 > #### Windows
 >
@@ -160,7 +159,9 @@ These data serve as fundamental and important materials for representing and ana
 > ---
 > #### Mac / Linux
 >
->
+> - (To be added)
+
+ <br/>
 
 - Open cmd and verify Python installation. Enter the following command:
     ```sh
@@ -170,13 +171,14 @@ These data serve as fundamental and important materials for representing and ana
 ### 2. Create Virtual Environment
 
 - Navigate to the directory in the cmd where you want to create the virtual environment. To move to the directory you created earlier, enter the following command:
-    ```sh
-    # Windows
-    cd C:\mago3d
-  
-    # Mac / Linux
-    cd ~/mago3d
-    ```
+    - Windows
+      ```sh
+      cd C:\mago3d
+      ```
+    - Mac / Linux
+      ```sh
+      cd ~/mago3d
+      ```
 
 - Enter the following command to create a virtual environment:
     ```sh
@@ -228,7 +230,7 @@ These data serve as fundamental and important materials for representing and ana
     ```
 
 - Download Bangkok's transportation data to khlongtoei_transportation.geojson file
-  - windows
+  - Windows
     ```sh
     overturemaps download ^
       --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 ^

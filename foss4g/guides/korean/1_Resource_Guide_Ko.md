@@ -10,25 +10,23 @@
 이 폴더는 실습 과정에서 데이터를 저장하고 관리하기 위한 기본 작업 공간이 됩니다.  
 Windows와 Mac/Linux 환경에 맞춰 아래 단계를 따라 진행하세요.
 
-> ### Windows
->
-> 1. 명령 프롬프트 실행 
->   - 시작 메뉴에서 cmd 또는 명령 프롬프트를 검색하여 실행합니다.
-> 2. 아래 명령어를 입력하여 폴더를 생성합니다:
->    ```sh
->    C:\> mkdir mago3d
->    ```
-> 3. 생성된 폴더는 C:\mago3d 경로에 위치합니다.
+- Windows
+  1. 명령 프롬프트 실행 
+     - 시작 메뉴에서 cmd 또는 명령 프롬프트를 검색하여 실행합니다.
+  2. 아래 명령어를 입력하여 폴더를 생성합니다:
+     ```sh
+     C:\> mkdir mago3d
+     ```
+  3. 생성된 폴더는 C:\mago3d 경로에 위치합니다.
 
-> ### Mac / Linux
->
-> 1. 터미널 실행 
->    - Mac에서는 Launchpad에서, Linux에서는 응용 프로그램 메뉴에서 터미널을 실행합니다.
-> 2. 아래 명령어를 입력하여 폴더를 생성합니다:
->     ```sh
->     $ mkdir ~/mago3d
->    ```
-> 3. 생성된 폴더는 홈 디렉토리`~/mago3d`에 위치합니다.
+- Mac / Linux
+  1. 터미널 실행 
+     - Mac에서는 Launchpad에서, Linux에서는 응용 프로그램 메뉴에서 터미널을 실행합니다.
+  2. 아래 명령어를 입력하여 폴더를 생성합니다:
+     ```sh
+     mkdir ~/mago3d
+     ```
+  3. 생성된 폴더는 홈 디렉토리`~/mago3d`에 위치합니다.
 
 <br/>
 이제 실습 준비가 완료되었습니다. 다음 단계를 진행하세요! 🚀
@@ -152,7 +150,7 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 
 - [Python을 설치합니다](https://www.python.org/downloads/)
 
-> ####  ⚙️️ 설치 시 확인 사항
+> ### 📢️ 설치 시 확인 사항
 >
 > #### Windows
 >
@@ -161,7 +159,9 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 >
 > #### Mac / Linux
 > 
-> 
+> - (추가 예정)
+
+<br/>
 
 - cmd 창을 열고 Python이 설치되었는지 확인합니다. 다음 명령어를 입력하세요.
     ```sh
@@ -171,13 +171,14 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
 ### 2. 가상환경 생성
 
 - cmd 창에서 가상환경을 생성하려는 디렉터리로 이동합니다. 아까 생성해준 디렉터리로 이동하려면 다음 명령어를 입력하세요.
-    ```sh
-    # Windows
-    cd C:\mago3d
-  
-    # Mac / Linux
-    cd ~/mago3d
-    ```
+    - Windows
+      ```sh
+      cd C:\mago3d
+      ```
+    - Mac / Linux
+      ```sh
+      cd ~/mago3d
+      ```
 
 - 다음 명령어를 입력하여 가상환경을 생성합니다.
     ```sh
@@ -229,7 +230,7 @@ Visual Studio Code 또는 IntelliJ 사용을 권장합니다.
     ```
 
 - 방콕의 transportation 데이터를 khlongtoei_transportation.geojson 파일로 다운로드합니다.
-  - windows 
+  - Windows 
     ```sh
     overturemaps download ^
       --bbox=100.5507001257371797,13.6970007530963525,100.6016431134770528,13.7428667529314463 ^
