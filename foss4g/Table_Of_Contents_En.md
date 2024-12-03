@@ -23,8 +23,8 @@
 
 ### Mago3D Usage Guide
 
-- MAGO3D-TILER
-- MAGO3D-TERRAINER
+- mago3DTiler
+- mago3DTerrainer
 
 ### GeoServer Usage Guide
 

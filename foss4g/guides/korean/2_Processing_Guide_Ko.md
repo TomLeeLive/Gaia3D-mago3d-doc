@@ -144,40 +144,39 @@ mago3d-terrainer를 통해 terrain 정보로 변환할 파일이며, mago3d-tile
     - input> khlongtoei_building.geojson
     - dem> ASTGTMV003_N13E100_dem.tif
   
-## MAGO3D-TILER
+## mago3DTiler
 
-- 건물의 기본 높이 값을 3.3m로 지정하여 mago3d-tiler를 돌립니다.
-- 컴퓨터 사양과 네트워크에 따라 최소 7분정도 소요됩니다.
+건물의 기본 높이 값을 3.3m로 지정하여 mago3d-tiler를 돌립니다.  
+컴퓨터 사양과 네트워크에 따라 최소 7분정도 소요됩니다.
 
-### Windows
+- Windows
+    ```sh
+    docker run ^
+      --rm ^
+      -v C:\mago3d\workspace:/workspace gaia3d/mago-3d-tiler ^
+      -input /workspace/input ^
+      -output /workspace/output ^
+      -it geojson ^
+      -crs 4326 ^
+      -te /workspace/dem/ASTGTMV003_N13E100_dem.tif ^
+      -mh 3.3 ^
+      -hc height
+    ```
 
-```sh
-docker run ^
-  --rm ^
-  -v C:\mago3d\workspace:/workspace gaia3d/mago-3d-tiler ^
-  -input /workspace/input ^
-  -output /workspace/output ^
-  -it geojson ^
-  -crs 4326 ^
-  -te /workspace/dem/ASTGTMV003_N13E100_dem.tif ^
-  -mh 3.3 ^
-  -hc height
-```
-
-### Mac / Linux
-
-```sh
-docker run \
-  --rm \
-  -v ~/mago3d/workspace:/workspace gaia3d/mago-3d-tiler \
-  -input /workspace/input \
-  -output /workspace/output \
-  -it geojson \
-  -crs 4326 \
-  -te /workspace/dem/ASTGTMV003_N13E100_dem.tif \
-  -mh 3.3 \
-  -hc height
-```
+- Mac / Linux
+    ```sh
+    docker run \
+      --rm \
+      -v ~/mago3d/workspace:/workspace gaia3d/mago-3d-tiler \
+      -input /workspace/input \
+      -output /workspace/output \
+      -it geojson \
+      -crs 4326 \
+      -te /workspace/dem/ASTGTMV003_N13E100_dem.tif \
+      -mh 3.3 \
+      -hc height
+    ```
+  
 <br/>
 
 > ### 실행 명령어 설명
@@ -198,38 +197,38 @@ docker run \
 <br/>
 
 ---
-## MAGO3D-TERRAINER
+## mago3DTerrainer
 
-- terrain의 최대 깊이를 14로 지정하여 mago3d-terrainer를 돌립니다.
-- 컴퓨터 사양과 네트워크에 따라 최소 10분 정도 소요됩니다.
+terrain의 최대 깊이를 14로 지정하여 mago3d-terrainer를 돌립니다.  
+컴퓨터 사양과 네트워크에 따라 최소 10분 정도 소요됩니다.
 
-### Windows
 
-```sh
-docker run ^
-  --rm ^
-  -v C:\mago3d\workspace:/workspace gaia3d/mago-3d-terrainer ^
-  -input /workspace/dem ^
-  -output /workspace/assets/terrain ^
-  -cn ^
-  -it bilinear ^
-  -mn 0 ^
-  -mx 14
-```
+- Windows
+    ```sh
+    docker run ^
+      --rm ^
+      -v C:\mago3d\workspace:/workspace gaia3d/mago-3d-terrainer ^
+      -input /workspace/dem ^
+      -output /workspace/assets/terrain ^
+      -cn ^
+      -it bilinear ^
+      -mn 0 ^
+      -mx 14
+    ```
 
-### Mac / Linux
-
-```sh
-docker run \
-  --rm \
-  -v ~/mago3d/workspace:/workspace gaia3d/mago-3d-terrainer \
-  -input /workspace/dem \
-  -output /workspace/assets/terrain \
-  -cn \
-  -it bilinear \
-  -mn 0 \
-  -mx 14
-```
+- Mac / Linux
+    ```sh
+    docker run \
+      --rm \
+      -v ~/mago3d/workspace:/workspace gaia3d/mago-3d-terrainer \
+      -input /workspace/dem \
+      -output /workspace/assets/terrain \
+      -cn \
+      -it bilinear \
+      -mn 0 \
+      -mx 14
+    ```
+  
 <br/>
 
 ### 실행 명령어 설명
