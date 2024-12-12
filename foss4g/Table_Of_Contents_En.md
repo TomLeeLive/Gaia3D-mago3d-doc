@@ -1,9 +1,8 @@
 # Table of Contents
 
-## [1. Mago3D Data Collection Guide](guides/english/1_Resource_Guide_En.md)
+## [1. Data Collection Guide](guides/english/1_Resource_Guide_En.md)
 
-### Data Construction Approach
-
+### How to build data
 - Basic Setting for Practice
 - Using Docker
 - Verifying GeoServer Access
@@ -12,32 +11,28 @@
 - Downloading Copernicus Data Space Ecosystem (Sentinel) Data
 - Downloading NASA DEM Data
 
-## [2. Mago3D Data Processing Guide](guides/english/2_Processing_Guide_En.md)
+## [2. Data Processing Guide](guides/english/2_Processing_Guide_En.md)
 
-### Preprocessing Data to be Used
-
+### Preprocessing data
 - Processing Overture Maps Data
 - Processing Copernicus Data Space Ecosystem (Sentinel) Data
 - Processing NASA DEM Data
 
-### Mago3D Usage Guide
-
+### ⭐mago3D Usage Guide⭐
 - mago3DTiler
 - mago3DTerrainer
 
 ### GeoServer Usage Guide
-
 - Verify GeoServer Data Directory
 - Create Workspace
 - Create Store
 - Publish Layer
 - Layer Preview
 
+## [3. Visualization Guide](guides/english/3_Visualization_Guide_En.md)
 ### Confirming Results Using Sample Code
-
 - Visual Studio Code
 - IntelliJ
-
 - ⭐result⭐
 
 ## [+) Hardware Acceleration](guides/english/Hardware_Acceleration_En.md)
