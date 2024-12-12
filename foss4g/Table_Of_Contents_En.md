@@ -2,11 +2,13 @@
 
 ## [1. Data Collection Guide](guides/english/1_Resource_Guide_En.md)
 
-### How to build data
-- Basic Setting for Practice
+### ⚙️ Basic Setup
+- Create Practical Folder
+- IDE Preparation
 - Using Docker
 - Verifying GeoServer Access
-- IDE Setup
+
+### ⬇️ Downloading Data
 - Downloading Overture Maps Data
 - Downloading Copernicus Data Space Ecosystem (Sentinel) Data
 - Downloading NASA DEM Data
