@@ -8,7 +8,6 @@
 - Using Docker
 - Verifying GeoServer Access
 - IDE Setup
-
 - Downloading Overture Maps Data
 - Downloading Copernicus Data Space Ecosystem (Sentinel) Data
 - Downloading NASA DEM Data
