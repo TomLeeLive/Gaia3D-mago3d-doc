@@ -33,8 +33,8 @@
 
 ## [3. Visualization Guide](guides/english/3_Visualization_Guide_En.md)
 ### Confirming Results Using Sample Code
-- Visual Studio Code
-- IntelliJ
+- Sample Code
+- Running the sample code in the IDE 
 - ⭐result⭐
 
 ## [+) Hardware Acceleration](guides/english/Hardware_Acceleration_En.md)
