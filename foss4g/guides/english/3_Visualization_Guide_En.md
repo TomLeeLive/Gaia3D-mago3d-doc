@@ -48,6 +48,7 @@ This is a UI panel containing buttons that allow users to interact with specific
 
 ### Javascript code
 #### 1. Cesium Viewer Initialization
+Sets up the viewer and the initial 3D globe environment.  
 ```javascript
 const viewer = new Cesium.Viewer('cesiumContainer');
 viewer.scene.globe.depthTestAgainstTerrain = true; // Ensures proper depth testing for 3D objects against terrain.
@@ -59,6 +60,7 @@ viewer.scene.requestRenderMode = true; // Optimizes rendering performance by onl
 ---
 
 #### 2. Resource Configuration
+Specifies resources such as imagery providers or external data sources.  
 ```javascript
 const resource_3d = './output/tileset.json'; // Path to the 3D tileset resource.
 const resource_terrain = './assets/terrain/'; // Path to terrain data.
@@ -71,6 +73,7 @@ Defines file paths and GeoServer URLs used for terrain, 3D tiles, and 2D imagery
 ---
 
 #### 3. Terrain Setup
+Configures the terrain, such as adding a Quantized-Mesh terrain for realistic elevation.  
 ```javascript
 viewer.terrainProvider = await Cesium.CesiumTerrainProvider.fromUrl(resource_terrain);
 ```
@@ -79,6 +82,7 @@ Configures the Cesium Viewer to use terrain data from the specified path.
 ---
 
 #### 4. 3D Tileset Setup
+Loads 3D tilesets, like buildings or other 3D models, to display in the scene.  
 ```javascript
 const tileset = await Cesium.Cesium3DTileset.fromUrl(resource_3d);
 viewer.scene.primitives.add(tileset);
@@ -88,6 +92,7 @@ Loads a 3D tileset (e.g., buildings or other structures) and adds it to the scen
 ---
 
 #### 5. Base Imagery Setup
+Adds a base map layer (e.g., OpenStreetMap, Bing Maps) for context.  
 ```javascript
 viewer.scene.imageryLayers.removeAll(); // Removes any default imagery layers.
 const osm = new Cesium.OpenStreetMapImageryProvider({
@@ -100,6 +105,7 @@ Sets the base map imagery to OpenStreetMap tiles.
 ---
 
 #### 6. Adding Layers from GeoServer
+Integrates WMS layers from GeoServer, such as transportation or satellite imagery.  
 ```javascript
 const layers = {};
 const addLayer = (layerName) => {
@@ -129,6 +135,7 @@ Dynamically adds GeoServer WMS layers (e.g., satellite imagery, transportation d
 ---
 
 #### 7. Post-Render Listener for Styling
+Applies additional styling after rendering, enhancing the visualization.  
 ```javascript
 const removeListener = viewer.scene.postRender.addEventListener(
     function () {
@@ -144,6 +151,7 @@ Ensures styling is applied after terrain and tiles are loaded.
 ---
 
 #### 8. Fly-to Functionality
+Allows the camera to fly to specific coordinates or zoom in on particular features.  
 ```javascript
 const bangkok = { lat: 13.730276, lng: 100.560534 };
 const bangkokBtn = document.getElementById("bangkok-btn");
@@ -161,6 +169,7 @@ Defines a function to move the camera to a specific position (e.g., Bangkok) whe
 ---
 
 #### 9. Toggle 3D Buildings / Toggle GeoServer Layers
+Adds the function to show or hide different layers interactively.  
 ```javascript
 const buildingsBtn = document.getElementById("buildings-btn");
 
@@ -195,6 +204,7 @@ Dynamically generates buttons to toggle the visibility of GeoServer layers.
 ---
 
 #### 10. Apply 3D Tile Styling
+Changes the appearance of 3D Tiles, such as highlighting features or applying color schemes.  s
 ```javascript
 const setStyle = () => {
     tileset.style = new Cesium.Cesium3DTileStyle({
@@ -218,6 +228,10 @@ const setStyle = () => {
 };
 ```
 Applies a dynamic style to the 3D tileset based on the height attribute, coloring features according to their elevation.
+
+#### 11. Highlighting Building Outlines
+It applies a style to emphasize building outlines, making structures more visible in the visualization.  
+While this is a useful enhancement, it’s entirely optional and doesn’t affect the core functionality.  
 
 ---
 
@@ -256,6 +270,24 @@ Applies a dynamic style to the 3D tileset based on the height attribute, colorin
 
 <br/>
 
----
+> ### Here’s an additional point to keep in mind:
+>
+> You might notice that the terrain is curved, while the buildings are rectangular, which can sometimes create visible gaps between them. 
+> To handle this, mago-3d-tiler includes a skirt option.  
+> * How it works:
+>
+> The building’s center is first aligned with the terrain.  
+> During the tile generation process, the skirt option extends the base of the building downward by a specific value. 
+> This ensures that the building appears seamlessly connected to the curved terrain.  
+> 
+> * Default Value:
+>
+> The default skirt value is 7 meters, meaning the base depth of the buildings is extended by 7 meters. 
+> This effectively fills the gaps between the buildings and the terrain.
+
+
+<br/>
 
 ## 🎉 Congratulations! 🎉
+
+

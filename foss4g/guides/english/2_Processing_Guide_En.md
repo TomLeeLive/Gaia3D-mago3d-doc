@@ -2,19 +2,19 @@
 
 # :bookmark_tabs: Data Preprocessing to be Used
 
-Before starting the practical session, this chapter will proceed with data processing and conversion tasks necessary for utilizing data in Mago3D and GeoServer.
-These tools provide powerful capabilities for implementing and visualizing urban digital twins, but require data conversion to formats that match each tool's characteristics and requirements.
-The data conversion work to be performed can be summarized in the following table:
+Before starting the session, this chapter will proceed with data processing and conversion tasks necessary for utilizing data in mago3D and GeoServer.  
+These tools provide powerful capabilities for implementing and visualizing urban digital twins, but require data conversion to formats that match each tool's characteristics and requirements.  
+The data conversion work to be performed can be summarized in the following table:  
 
-| Original Filename | Before Conversion | After Conversion |                    Reason for Conversion                    |  
-|:---:|:-------:|:----------:|:--------------------------------------------:|
-|khlongtoei_building.geojson| GeoJSON |  3DTiles   | To smoothly render in Mago3D according to osgeo standards |
-|khlongtoei_transportation.geojson| GeoJSON | Geopackage | To improve management and deployment efficiency in GeoServer |
-|T47PPR_20240430T033541_TCI_10m.jp2|   JP2   |  GeoTiff   | To convert satellite imagery to a format suitable for analysis and distribution in GeoServer |
+| Original Filename | Before Conversion | After Conversion |                        Reason for Conversion                        |  
+|:---:|:-------:|:----------:|:-------------------------------------------------------------------:|
+|khlongtoei_building.geojson| GeoJSON |  3DTiles   |       To smoothly render in mago3D according to OGC standards       |
+|khlongtoei_transportation.geojson| GeoJSON | Geopackage |        To convert geojson to a suitable format for GeoServer         |
+|T47PPR_20240430T033541_TCI_10m.jp2|   JP2   |  GeoTiff   |   To convert satellite imagery to a suitable format for GeoServer   |
 
-<br/>
-
-Preparation is now complete. Proceed to the next step! 🚀
+converting the building data from Overture Maps from GeoJSON to 3D Tiles.  
+convert the transportation GeoJSON into a GeoPackage format and publish it as a GeoServer layer.  
+the Sentinel imagery, received in JP2 format, will be converted to GeoTIFF and also published as a GeoServer layer.  
 
 ---
 ## 1. Processing Overture Maps Data
@@ -24,8 +24,18 @@ Preprocessing of the received GeoJSON data is required in the Python virtual env
 
 ### 1. khlongtoei_building.geojson
 
-This file will be converted to 3DTiles using mago3d-tiler.
-This GeoJSON file includes buildings without height values, so we will extract and process building heights.
+The building geojson file from Overture Maps has two attributes for height:  
+`height` and `num_floor`(number of floors)  
+
+Most of the data do not include height, but have information about the number of floors.
+To calculate the height, multiply the number of floors by 3.3.  
+
+If you check the following command, you'll notice the sql option.  
+This allows us to process data using SQL queries.  
+
+First, extracting height where they are not null.  
+Second, extracting height where they are null and calculate height num_floors * 3.3.  
+Finally, merge these two geojson files.  
 
 - Extract building heights from khlongtoei_building.geojson file:
     - Windows
@@ -82,6 +92,9 @@ This GeoJSON file includes buildings without height values, so we will extract a
       ```
 
 - Create an `input` folder in the `C:\mago3d\workspace` path and place the merged khlongtoei_building.geojson file inside.
+
+If both height and floor count are missing, the `-mh` options(minimumHeight) in `mago-3d-tiler` can help.  
+This option sat a default height for extrusion when the height column is empty.  
 
 ### 2. khlongtoei_transportation.geojson
 
@@ -140,7 +153,8 @@ Data processing is now complete. Proceed to the next step! 🚀
 ---
 # 🌟 mago3D Usage Guide
 
-[mago3DTiler Github](http://github.com/Gaia3D/mago-3d-tiler)
+The `mago3DTiler` converts preprocessed building GeoJSON and DEM files into 3D buildings on the terrain.  
+For more information, visit the [mago3DTiler Github](http://github.com/Gaia3D/mago-3d-tiler)
 
 - Verify that the data is correctly placed in the `input` and `dem` folders in the `C:\mago3d\workspace` path.
     - input> khlongtoei_building.geojson
@@ -181,14 +195,12 @@ Depending on computer specifications and network, it may take a minimum of 7 min
   
 <br/>
 
+`docker run --rm -v`: The standard Docker command to run a container with volume mounting.  
+
 > ### Command Explanation
 >
 > Enter `docker run gaia3d/mago-3d-tiler --help` to see all command options.
 >
-> - `--rm`: Automatically delete the container after execution
-> - `-v`: Mount data directory volume
->   - Mount the `C:\mago3d\workspace` path to mago3d-tiler's data_dir to connect data.
-> - `-input`: Path containing pre-conversion materials
 > - `-output`: Path to store post-conversion materials
 > - `-it` (`--inputType`): Data type of pre-conversion materials
 > - `-crs`: EPSG coordinate system of pre-conversion materials
@@ -198,11 +210,25 @@ Depending on computer specifications and network, it may take a minimum of 7 min
 
 <br/>
 
+> ### 3DTiles
+>
+> 3D Tiles is an open standard developed by Cesium for efficiently streaming and rendering massive heterogeneous 3D geospatial datasets.
+> It enables dynamic visualization of models such as buildings, terrain, photogrammetry, point clouds, and vector data by organizing them into a spatially and hierarchically structured format.
+> This allows seamless level-of-detail management and optimal performance for web and desktop applications, making it a core technology for digital twins, urban planning, and geospatial analysis.
+
+Once the data conversion is complete, you’ll find a `data` folder and a `tileset.json` file in the output directory.  
+These are your 3D Tiles, ready to use.  
+
+Enjoy working with `mago-3d-tiler`, and remember, your feedback and contributions help us keep improving! 😊
+
 ---
 ## mago3DTerrainer
 
+It converts DEM files into the Quantized Mesh Terrain format, supporting multiple DEM files, even with varying resolutions or overlapping areas.  
+It also provides excellent mesh optimization.  
+
 Run mago3d-terrainer with the maximum terrain depth set to 14.  
-Depending on computer specifications and network, it may take a minimum of 10 minutes.
+Depending on computer specifications and network, it may take a minimum of 10 minutes.  
 
 - Windows
     ```sh
@@ -233,12 +259,9 @@ Depending on computer specifications and network, it may take a minimum of 10 mi
 <br/>
 
 ### Command Explanation
+`docker run --rm -v`: The standard Docker command to run a container with volume mounting.
 
 Enter `docker run gaia3d/mago-3d-terrainer --help` to see all command options.
-
-> - `--rm`: Automatically delete the container after execution
-> - `-v`: Mount data directory volume
->   - Mount the `C:\mago3d\workspace` path to mago3d-terrainer's data_dir to connect data.
 > - `-input`: Path containing pre-conversion materials
 > - `-output`: Path to store post-conversion materials
 > - `-cn` (`--calculateNormals`): Automatically calculate normal vectors
@@ -250,6 +273,16 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to see all command options.
 > - `-mn` (`--minDepth`): Set minimum tile depth
 > - `-mx` (`--maxDepth`): Set maximum tile depth
 
+For this exercise, we’ll limit the levels from 0 to 14.  
+After conversion, the output directory will contain folders labeled from `0 to 14` and a `layer.json` file.  
+
+Since Bangkok is mostly flat, the terrain might not look very dramatic, but it’s still essential for integrating with the 3D Tiles.  
+
+This concludes the core part of the workshop: creating 3D Tiles and terrain.  
+While the conversion runs, let’s move on to the next exercise.  
+
+If you have any questions about the process, feel free to ask! 😊  
+
 ---
 # 🗺️ GeoServer Usage Guide
 
@@ -257,6 +290,9 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to see all command options.
 
 - Navigate to `C:\mago3d\workspace\geoserver\data` path and confirm that data is correctly placed.
     - data > khlongtoei_transportation.gpkg, T47PPR_20240430T033541_TCI_10m.tif
+
+The sample code already includes the workspace and layer name for GeoServer.  
+It’s recommended to stick to the guide and use the same names to avoid confusion.
 
 ## 2. Create Workspace
 
@@ -365,6 +401,15 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to see all command options.
    ![](../../images/en/gs_preview.png)
 
 <br/>
+
+So far, we’ve been publishing layers in GeoServer.  
+GeoServer is an open-source geographic server designed to serve 2D geospatial data using OGC standards.
+In the next session, we’ll explore **WMS** (Web Map Service), a standard web interface, to access and visualize these published layers.
+This will allow us to integrate and display the layers in various GIS platforms or web applications seamlessly.  
+
+In this session, we’ve focused on converting data into formats that can be visualized on a web page.  
+The building GeoJSON and DEM were converted into 3D Tiles, while the DEM was used to create Quantized-Mesh Terrain.  
+We also published transportation and satellite image layers in GeoServer, making them ready to serve via WMS.  
 
 All tasks are now complete. Let's check the results! 🚀
 

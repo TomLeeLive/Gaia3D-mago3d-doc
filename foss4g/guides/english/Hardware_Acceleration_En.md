@@ -1,5 +1,14 @@
 # Google Hardware Acceleration Settings
 
+Now we’re at the most important exercise!  
+
+For those of you using laptops, many web browsers don’t use the GPU for rendering 3D graphics by default.  
+Without GPU acceleration, performance can be slower, especially for complex visualizations.  
+In this session, we’ll guide you through enabling 3D graphics acceleration in your web browser, 
+ensuring smoother rendering and better performance.  
+
+Let’s get started!  
+
 ## WINDOWS (ver.11)
 
 ### 1. Chrome Settings
@@ -68,3 +77,20 @@
 - WebGL, required by Cesium, will not function properly, causing errors.
 
   ![](../../images/en/mac_webgl.png)
+
+---
+
+## Conclusion
+
+Let’s take a moment to wrap up this workshop.  
+
+In this workshop, we practiced building a digital twin of a city.  
+- open data
+- open source
+- use OGC standard
+(Quantized Mesh is not an OGC standard.)  
+
+We successfully visualized foundational data for a city’s digital twin in a web browser--**without any additional costs.**  
+Based on what you’ve learned today, why not try creating a digital twin of your own city?
+
+---
