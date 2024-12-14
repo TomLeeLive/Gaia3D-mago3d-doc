@@ -111,7 +111,7 @@ Enter the following command to run the GeoServer container.
 
 - Windows
   ```sh
-  docker run ^
+  docker run -d ^
     -v C:\mago3d\geoserver:/opt/geoserver/data_dir ^
     -e GEOSERVER_ADMIN_USER=admin ^
     -e GEOSERVER_ADMIN_PASSWORD=geoserver ^
@@ -120,7 +120,7 @@ Enter the following command to run the GeoServer container.
 
 - Mac / Linux
   ```sh
-  docker run \
+  docker run -d \
     -v ~/mago3d/geoserver:/opt/geoserver/data_dir \
     -e GEOSERVER_ADMIN_USER=admin \
     -e GEOSERVER_ADMIN_PASSWORD=geoserver \
@@ -128,7 +128,8 @@ Enter the following command to run the GeoServer container.
   ```
 
 > #### Command Explanation
->
+> 
+> - `-d`: Run container in background and print container ID
 > - `-v`: Data directory volume mount
 >  - Mount the `C:\mago3d\geoserver` path to GeoServer's data_dir to store data.
 > - `-e`: Environment variable settings
