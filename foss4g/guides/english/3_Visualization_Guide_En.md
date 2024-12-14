@@ -13,9 +13,9 @@
 <script src="https://cesium.com/downloads/cesiumjs/releases/1.121/Build/Cesium/Cesium.js"></script>
 <link href="https://cesium.com/downloads/cesiumjs/releases/1.121/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 ```
-CesiumJS is an open-source JavaScript library for 3D globe and map visualization.
-`Cesium.js`: Cesium is used in JavaScript code for rendering maps and 3D globes.
-`widgets.css`: This is a CSS file that provides the default UI component styles for Cesium.
+CesiumJS is an open-source JavaScript library for 3D globe and map visualization.  
+`Cesium.js`: Cesium is used in JavaScript code for rendering maps and 3D globes.  
+`widgets.css`: This is a CSS file that provides the default UI component styles for Cesium.  
 
 ---
 
