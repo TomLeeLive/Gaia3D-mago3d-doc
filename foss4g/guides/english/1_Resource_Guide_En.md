@@ -165,9 +165,13 @@ If access is successful, check the GeoServer admin screen.
 
 ## ⬇️ Downloading Data
 
-In this practice, we will download building, transportation, satellite imagery, and DEM (Digital Elevation Model) data for urban digital twin construction.  
+In this practice, We’ll be downloading data for **buildings**, **transportation**, **satellite** imagery, and **DEM** (Digital Elevation Model).
 These data are available from platforms like Overture Maps, NASA, and Copernicus Data Space Ecosystem, all accessible as **Open Data**.
+* For **buildings** and **transportation**, we’ll use Overture Maps data.
+* For **satellite** imagery, we’ll use data from Sentinel.
+* For **DEM**, we’ll download it from NASA.
 
+Buildings will be represented in 3D, transportation as 2D vectors, satellite imagery as 2D raster, and DEM as terrain. These are the key data formats that form the foundation of spatial information.
 These data serve as fundamental and important materials for representing and analyzing urban spatial information three-dimensionally, utilizing various data formats such as 3D, Vector, Raster, and Terrain.
 
 ### Downloading Overture Maps Data
