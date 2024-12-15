@@ -111,7 +111,7 @@ Enter the following command to run the GeoServer container.
 
 - Windows
   ```sh
-  docker run -d ^
+  docker run ^
     -v C:\mago3d\geoserver:/opt/geoserver/data_dir ^
     -e GEOSERVER_ADMIN_USER=admin ^
     -e GEOSERVER_ADMIN_PASSWORD=geoserver ^
@@ -120,7 +120,7 @@ Enter the following command to run the GeoServer container.
 
 - Mac / Linux
   ```sh
-  docker run -d \
+  docker run \
     -v ~/mago3d/geoserver:/opt/geoserver/data_dir \
     -e GEOSERVER_ADMIN_USER=admin \
     -e GEOSERVER_ADMIN_PASSWORD=geoserver \
@@ -128,8 +128,7 @@ Enter the following command to run the GeoServer container.
   ```
 
 > #### Command Explanation
-> 
-> - `-d`: Run container in background and print container ID
+>
 > - `-v`: Data directory volume mount
 >  - Mount the `C:\mago3d\geoserver` path to GeoServer's data_dir to store data.
 > - `-e`: Environment variable settings
@@ -190,12 +189,34 @@ These data serve as fundamental and important materials for representing and ana
 > ---
 > #### MacOS
 >
-> - Click the link to install the latest version of python.
-> - [https://www.python.org/downloads/macos/](https://www.python.org/downloads/macos/)
+> - After completing the installation, you need to configure the Python environment variables.
+>
+> 1. Check the installation path of Python by running the following command:
+>   ```shell
+>   python3 --version
+>   ```
 > 
-> - During installation, check [Add python.exe to PATH] and click [Install Now].
-> - ![](../../images/en/installPython.png)
-> 
+> 2. Modify Shell Configuration File to Set Environment Variables
+> - 1. Open the shell configuration file (~/.zshrc for Zsh users) using the vi editor:
+>     ```shell
+>     vi ~/.zshrc
+>     ```
+> - 2. Add the Python installation path to the PATH environment variable:
+> -    Append the following line to the bottom of the file:
+>      ```shell
+>      export PATH="<output_of_the_previous_command>:$PATH"
+>      ```
+> -    Replace <output_of_the_previous_command> with the result from the which python3 command. For example:
+>      ```shell
+>      export PATH="/usr/local/bin/python3:$PATH"
+>      ```
+> 3. Apply the Environment Variables
+> - After modifying the ~/.zshrc file, apply the changes by running:
+>  ```shell
+>  source ~/.zshrc
+>  ```
+> This will update the current shell session with the new environment variable settings.
+>
 > #### Linux
 > 
 > - Open Terminal and verify Python installation.
@@ -245,7 +266,7 @@ These data serve as fundamental and important materials for representing and ana
     ```
   - Mac / Linux
     ```sh
-    source myenv/bin/activate
+    source myvenv/bin/activate
     ```
 
 - When you execute the command, the prompt will change to `(myvenv)`, indicating that the virtual environment is activated.

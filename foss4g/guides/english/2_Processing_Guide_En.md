@@ -42,14 +42,14 @@ Finally, merge these two geojson files.
       ```sh
       docker run --rm ^
         -v C:\mago3d\workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr ^
-        -f "GeoJSON" /data/khlongtoei_hegiht.geojson /data/khlongtoei_building.geojson ^
+        -f "GeoJSON" /data/khlongtoei_height.geojson /data/khlongtoei_building.geojson ^
         -sql "SELECT height FROM khlongtoei_building WHERE height IS NOT NULL"
       ```
     - Mac / Linux
       ```sh
       docker run --rm \
         -v ~/mago3d/workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr \
-        -f "GeoJSON" /data/khlongtoei_hegiht.geojson /data/khlongtoei_building.geojson \
+        -f "GeoJSON" /data/khlongtoei_height.geojson /data/khlongtoei_building.geojson \
         -sql "SELECT height FROM khlongtoei_building WHERE height IS NOT NULL"
       ```
 
@@ -74,7 +74,7 @@ Finally, merge these two geojson files.
       ```sh 
       docker run --rm ^
         -v C:\mago3d\workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr ^
-        -f "GeoJSON" /data/khlongtoei_building.geojson /data/khlongtoei_hegiht.geojson
+        -f "GeoJSON" /data/khlongtoei_building.geojson /data/khlongtoei_height.geojson
     
       docker run --rm ^
         -v C:\mago3d\workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr ^
@@ -84,7 +84,7 @@ Finally, merge these two geojson files.
       ```sh 
       docker run --rm \
         -v ~/mago3d/workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr \
-        -f "GeoJSON" /data/khlongtoei_building.geojson /data/khlongtoei_hegiht.geojson
+        -f "GeoJSON" /data/khlongtoei_building.geojson /data/khlongtoei_height.geojson
     
       docker run --rm \
         -v ~/mago3d/workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr \
@@ -201,6 +201,7 @@ Depending on computer specifications and network, it may take a minimum of 7 min
 >
 > Enter `docker run gaia3d/mago-3d-tiler --help` to see all command options.
 >
+> - `-input`: Path containing pre-conversion materials
 > - `-output`: Path to store post-conversion materials
 > - `-it` (`--inputType`): Data type of pre-conversion materials
 > - `-crs`: EPSG coordinate system of pre-conversion materials
