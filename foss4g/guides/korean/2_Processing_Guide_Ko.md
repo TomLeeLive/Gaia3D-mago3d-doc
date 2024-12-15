@@ -31,14 +31,14 @@ mago3d-tiler를 돌려 3DTiles로 변환할 파일입니다.
       ```sh
       docker run --rm ^
         -v C:\mago3d\workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr ^
-        -f "GeoJSON" /data/khlongtoei_hegiht.geojson /data/khlongtoei_building.geojson ^
+        -f "GeoJSON" /data/khlongtoei_height.geojson /data/khlongtoei_building.geojson ^
         -sql "SELECT height FROM khlongtoei_building WHERE height IS NOT NULL"
       ```
     - Mac / Linux
       ```sh
       docker run --rm \
         -v ~/mago3d/workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr \
-        -f "GeoJSON" /data/khlongtoei_hegiht.geojson /data/khlongtoei_building.geojson \
+        -f "GeoJSON" /data/khlongtoei_height.geojson /data/khlongtoei_building.geojson \
         -sql "SELECT height FROM khlongtoei_building WHERE height IS NOT NULL"
       ```
   
@@ -64,7 +64,7 @@ mago3d-tiler를 돌려 3DTiles로 변환할 파일입니다.
       ```sh 
       docker run --rm ^
         -v C:\mago3d\workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr ^
-        -f "GeoJSON" /data/khlongtoei_building.geojson /data/khlongtoei_hegiht.geojson
+        -f "GeoJSON" /data/khlongtoei_building.geojson /data/khlongtoei_height.geojson
     
       docker run --rm ^
         -v C:\mago3d\workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr ^
@@ -74,7 +74,7 @@ mago3d-tiler를 돌려 3DTiles로 변환할 파일입니다.
       ```sh 
       docker run --rm \
         -v ~/mago3d/workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr \
-        -f "GeoJSON" /data/khlongtoei_building.geojson /data/khlongtoei_hegiht.geojson
+        -f "GeoJSON" /data/khlongtoei_building.geojson /data/khlongtoei_height.geojson
     
       docker run --rm \
         -v ~/mago3d/workspace:/data ghcr.io/osgeo/gdal:ubuntu-full-3.9.0 ogr2ogr \
