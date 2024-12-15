@@ -239,8 +239,8 @@ Depending on computer specifications and network, it may take a minimum of 10 mi
       -output /workspace/assets/terrain ^
       -cn ^
       -it bilinear ^
-      -mn 0 ^
-      -mx 14
+      -min 0 ^
+      -max 14
     ```
 
 - Mac / Linux
@@ -252,8 +252,8 @@ Depending on computer specifications and network, it may take a minimum of 10 mi
       -output /workspace/assets/terrain \
       -cn \
       -it bilinear \
-      -mn 0 \
-      -mx 14
+      -min 0 \
+      -max 14
     ```
   
 <br/>
@@ -270,8 +270,8 @@ Enter `docker run gaia3d/mago-3d-terrainer --help` to see all command options.
 >   - Two values can be used for this option: Nearest and Bilinear.
 >     - Nearest: Uses nearest neighbor interpolation to select the closest neighbor value when converting data.
 >     - Bilinear: Uses bilinear interpolation to calculate values based on four points.
-> - `-mn` (`--minDepth`): Set minimum tile depth
-> - `-mx` (`--maxDepth`): Set maximum tile depth
+> - `-min` (`--minDepth`): Set minimum tile depth
+> - `-max` (`--maxDepth`): Set maximum tile depth
 
 For this exercise, we’ll limit the levels from 0 to 14.  
 After conversion, the output directory will contain folders labeled from `0 to 14` and a `layer.json` file.  
