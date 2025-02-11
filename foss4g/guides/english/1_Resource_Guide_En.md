@@ -164,9 +164,13 @@ If access is successful, check the GeoServer admin screen.
 
 ## ⬇️ Downloading Data
 
-In this practice, we will download building, transportation, satellite imagery, and DEM (Digital Elevation Model) data for urban digital twin construction.  
+In this practice, We’ll be downloading data for **buildings**, **transportation**, **satellite** imagery, and **DEM** (Digital Elevation Model).
 These data are available from platforms like Overture Maps, NASA, and Copernicus Data Space Ecosystem, all accessible as **Open Data**.
+* For **buildings** and **transportation**, we’ll use Overture Maps data.
+* For **satellite** imagery, we’ll use data from Sentinel.
+* For **DEM**, we’ll download it from NASA.
 
+Buildings will be represented in 3D, transportation as 2D vectors, satellite imagery as 2D raster, and DEM as terrain. These are the key data formats that form the foundation of spatial information.
 These data serve as fundamental and important materials for representing and analyzing urban spatial information three-dimensionally, utilizing various data formats such as 3D, Vector, Raster, and Terrain.
 
 ### Downloading Overture Maps Data
@@ -185,12 +189,34 @@ These data serve as fundamental and important materials for representing and ana
 > ---
 > #### MacOS
 >
-> - Click the link to install the latest version of python.
-> - [https://www.python.org/downloads/macos/](https://www.python.org/downloads/macos/)
+> - After completing the installation, you need to configure the Python environment variables.
+>
+> 1. Check the installation path of Python by running the following command:
+>   ```shell
+>   python3 --version
+>   ```
 > 
-> - During installation, check [Add python.exe to PATH] and click [Install Now].
-> - ![](../../images/en/installPython.png)
-> 
+> 2. Modify Shell Configuration File to Set Environment Variables
+> - 1. Open the shell configuration file (~/.zshrc for Zsh users) using the vi editor:
+>     ```shell
+>     vi ~/.zshrc
+>     ```
+> - 2. Add the Python installation path to the PATH environment variable:
+> -    Append the following line to the bottom of the file:
+>      ```shell
+>      export PATH="<output_of_the_previous_command>:$PATH"
+>      ```
+> -    Replace <output_of_the_previous_command> with the result from the which python3 command. For example:
+>      ```shell
+>      export PATH="/usr/local/bin/python3:$PATH"
+>      ```
+> 3. Apply the Environment Variables
+> - After modifying the ~/.zshrc file, apply the changes by running:
+>  ```shell
+>  source ~/.zshrc
+>  ```
+> This will update the current shell session with the new environment variable settings.
+>
 > #### Linux
 > 
 > - Open Terminal and verify Python installation.
@@ -240,7 +266,7 @@ These data serve as fundamental and important materials for representing and ana
     ```
   - Mac / Linux
     ```sh
-    source myenv/bin/activate
+    source myvenv/bin/activate
     ```
 
 - When you execute the command, the prompt will change to `(myvenv)`, indicating that the virtual environment is activated.
